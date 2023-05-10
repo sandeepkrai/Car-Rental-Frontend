@@ -6,6 +6,7 @@ import 'package:dbs_project/views/homescreen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+
 class rent extends StatefulWidget {
   rent({Key? key}) : super(key: key);
 
