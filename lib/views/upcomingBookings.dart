@@ -25,7 +25,10 @@ class _upcomingBookingsState extends State<upcomingBookings> {
     bool? check1 = false;
     bool? check2 = false;
     bool? check3 = false;
-    Color one= background2;
+    //List<String> rating=["1","2","3","4","5"];
+    List<int> rating=[1,2,3,4,5];
+    String? a;
+    int? rate;
 
     return await showDialog(
         context: context,
@@ -42,32 +45,80 @@ class _upcomingBookingsState extends State<upcomingBookings> {
                     borderRadius: BorderRadius.circular(30.0)),
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: width*0.05, vertical: height*0.035),
-                  height: height*0.2,
-                  width: width,
+                  height: height*0.24,
                   child: Container(
                     width: width,
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text("Please enter rating!!", style: TextStyle(color: highlight, fontSize: height*0.025, fontWeight: FontWeight.bold),),
+                        Text("Please enter rating out of 5", style: TextStyle(color: highlight, fontSize: height*0.02, fontWeight: FontWeight.bold),),
                         SizedBox(
                           height: height*0.01,
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            IconButton(onPressed: (){
-                              one=highlight;
-                            }, icon: Icon(Icons.star, size: height*0.05,color:  one,)),
-                            IconButton(onPressed: (){
-                            }, icon: Icon(Icons.star, size: height*0.05,color:  (i >= 2)? highlight:background2,)),
-                            IconButton(onPressed: (){}, icon: Icon(Icons.star, size: height*0.05,color:  (i >= 3)? highlight:background2,)),
-                            IconButton(onPressed: (){}, icon: Icon(Icons.star, size: height*0.05,color:  (i >= 4)? highlight:background2,)),
-                            IconButton(onPressed: (){}, icon: Icon(Icons.star, size: height*0.05,color:  (i >= 5)? highlight:background2,)),
 
-                          ],
-                        )
+                        Container(
+                          margin: EdgeInsets.symmetric(
+                            horizontal: width * 0.03,
+                          ),
+                          padding: EdgeInsets.symmetric(horizontal: width * 0.02),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(color: highlight)),
+                          child: DropdownButtonHideUnderline(
+                            child: DropdownButton(
+                              dropdownColor: background,
+                              hint: Text(
+                                "Select Insuarance Code",
+                                style: TextStyle(
+                                    color: highlight,
+                                    fontSize: height * 0.02,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              isExpanded: true,
+                              value: rate,
+                              onChanged: (value) {
+                                setState(() {
+                                  rate = value;
+                                });
+                              },
+                              items: rating.map((value) {
+                                return DropdownMenuItem(
+                                  value: value,
+                                  child: Text(
+                                    value.toString(),
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                        fontSize: height * 0.02),
+                                  ),
+                                );
+                              }).toList(),
+                            ),
+                          ),
+                        ),
+                       SizedBox(
+                         width: width,
+                         child: ElevatedButton(onPressed: (){
+                           Navigator.pop(context);
+                         }, child: Text("Submit", style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold, fontSize: height*0.02),),
+                         style: ButtonStyle(
+                           backgroundColor: MaterialStatePropertyAll(highlight),
+
+                         ),
+                         ),
+                       )
+                        // Row(
+                        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        //   children: [
+                        //     IconButton(onPressed: (){}, icon: Icon(Icons.star, size: height*0.05,color:  (i >= 1)? highlight:background2,,)),
+                        //     IconButton(onPressed: (){}, icon: Icon(Icons.star, size: height*0.05,color:  (i >= 2)? highlight:background2,)),
+                        //     IconButton(onPressed: (){}, icon: Icon(Icons.star, size: height*0.05,color:  (i >= 3)? highlight:background2,)),
+                        //     IconButton(onPressed: (){}, icon: Icon(Icons.star, size: height*0.05,color:  (i >= 4)? highlight:background2,)),
+                        //     IconButton(onPressed: (){}, icon: Icon(Icons.star, size: height*0.05,color:  (i >= 5)? highlight:background2,)),
+                        //
+                        //   ],
+
 
 
                       ],
