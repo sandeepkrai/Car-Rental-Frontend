@@ -1,4 +1,5 @@
 import 'package:dbs_project/Utils/customer.dart';
+import 'package:dbs_project/Utils/lend.dart';
 import 'package:dbs_project/controller/functions.dart';
 import 'package:dbs_project/views/homescreen.dart';
 import 'package:dbs_project/views/signUp.dart';
@@ -6,19 +7,18 @@ import 'package:flutter/material.dart';
 import '../Constants/constantColors.dart';
 
 Customer customer = Customer(
-    firstName: 'firstName',
-    middleName: 'middleName',
-    lastName: 'lastName',
-    street: 'street',
-    city: 'city',
-    stateProvince: 'stateProvince',
-    country: 'country',
-    postalCode: 'postalCode',
-    drivingLicenseId: 'drivingLicenseId',
-    email: 'email',
-    phoneNumber: 'phoneNumber',
-
-    );
+  firstName: 'firstName',
+  middleName: 'middleName',
+  lastName: 'lastName',
+  street: 'street',
+  city: 'city',
+  stateProvince: 'stateProvince',
+  country: 'country',
+  postalCode: 'postalCode',
+  drivingLicenseId: 'drivingLicenseId',
+  email: 'email',
+  phoneNumber: 'phoneNumber',
+);
 
 class signIN extends StatefulWidget {
   const signIN({Key? key}) : super(key: key);
@@ -75,7 +75,7 @@ class _signINState extends State<signIN> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: width * 0.045),
                 child: TextField(
-                  obscureText: (_passwordVisible) ? false : true,
+                  obscureText: (_passwordVisible) ? false : false,
                   style: TextStyle(color: Colors.white),
                   cursorColor: Colors.white,
                   focusNode: pass,
@@ -124,6 +124,7 @@ class _signINState extends State<signIN> {
                     print(await checkLogin(username.text, password.text));
                     if (await checkLogin(username.text, password.text) == 1) {
                       customer = await fetchCustomer(username.text);
+                      getCars();
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute<void>(
