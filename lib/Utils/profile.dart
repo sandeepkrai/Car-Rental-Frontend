@@ -2,6 +2,8 @@ import 'package:dbs_project/Constants/constantColors.dart';
 import 'package:dbs_project/views/signIn.dart';
 import 'package:flutter/material.dart';
 
+import '../views/upcomingBookings.dart';
+
 class profile extends StatefulWidget {
   const profile({Key? key}) : super(key: key);
 
@@ -162,6 +164,49 @@ class _profileState extends State<profile> {
                       fontSize: height * 0.02,
                       fontWeight: FontWeight.bold,
                       color: Colors.white),
+                ),
+              ),
+              SizedBox(height: height*0.024),
+              SizedBox(
+                width: width,
+                height: height*0.055,
+                child: ElevatedButton(
+                  onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context) => upcomingBookings()));},
+                  child: Text("Upcoming Bookings", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: height*0.024),),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStatePropertyAll(background2),
+
+                  ),
+                ),
+              ),
+              SizedBox(height: height*0.024),
+              SizedBox(
+                width: width,
+                height: height*0.055,
+                child: ElevatedButton(onPressed: (){Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => signIN()));}, child: Text("LOG OUT", style: TextStyle(color: Colors.black, fontWeight: FontWeight.w800, fontSize: height*0.024),),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStatePropertyAll(highlight),
+
+                  ),
+                ),
+              ),
+
+              SizedBox(height: height*0.024),
+              SizedBox(
+                width: width,
+                height: height*0.055,
+                child: ElevatedButton(onPressed: (){Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => signIN()));}, child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.warning_rounded, color: Colors.white, size: height*0.032,) ,
+                    SizedBox(width: width*0.04,),
+                    Text("DELETE ACCOUNT", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800, fontSize: height*0.024),),
+                  ],
+                ),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStatePropertyAll(Colors.red),
+
+                  ),
                 ),
               ),
               SizedBox(height: 16.0),

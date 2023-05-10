@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 
 void fetchCustomerData() async {
   final response =
-      await http.get(Uri.parse('http://192.168.56.1:8000/viewTables/customer'));
+      await http.get(Uri.parse('http://localhost:8000/viewTables/customer'));
 
   if (response.statusCode == 200) {
     final jsonData = jsonDecode(response.body);
@@ -19,7 +19,7 @@ void fetchCustomerData() async {
 Future<int> checkLogin(String email, String password) async {
   // Define the url of the api
   var url = Uri.parse(
-      'http://192.168.56.1:8000/viewTables/login?email=use@example.com&password=password1');
+      'http://localhost:8000/viewTables/login?email=use@example.com&password=password1');
   // Define the query parameters
   var params = {
     'email': email,
@@ -51,7 +51,7 @@ Future<int> signup(
     String email,
     String password) async {
   // Define the url of the api
-  var url = Uri.parse('http://192.168.56.1:8000/viewTables/signup');
+  var url = Uri.parse('http://localhost:8000/viewTables/signup');
   // Define the query parameters
   var params = {
     'firstName': firstName,
@@ -80,7 +80,7 @@ Future<int> signup(
 
 Future<List<Car>> fetchCars() async {
   final response = await http
-      .get(Uri.parse('http://192.168.56.1:8000/viewTables/availableCars'));
+      .get(Uri.parse('http://localhost:8000/viewTables/availableCars'));
 
   if (response.statusCode == 200) {
     List<dynamic> data = jsonDecode(response.body);
@@ -107,7 +107,7 @@ Future<List<Car>> fetchCars() async {
 
 Future<Customer> fetchCustomer(String email) async {
   final response = await http.get(
-      Uri.parse('http://192.168.56.1:8000/viewTables/customer?email=$email'));
+      Uri.parse('http://localhost:8000/viewTables/customer?email=$email'));
   Customer customer = Customer(
       firstName: 'firstName',
       middleName: 'middleName',
@@ -170,7 +170,7 @@ Future<List<Discount>> fetchDiscounts() async {
 
 Future<int> rentCar(String email, String carNumber, String startDate, String endDate) async {
   // Define the url of the api
-  var url = Uri.parse('http://192.168.56.1:8000/viewTables/availableCars');
+  var url = Uri.parse('http://localhost:8000/viewTables/availableCars');
   // Define the query parameters
   var params = {
     'email': email,
@@ -192,7 +192,7 @@ Future<int> rentCar(String email, String carNumber, String startDate, String end
 
 Future<int> returnCar(String email, String carNumber, String startDate, String endDate) async {
   // Define the url of the api
-  var url = Uri.parse('http://192.168.56.1:8000/viewTables/availableCars'); 
+  var url = Uri.parse('http://localhost:8000/viewTables/availableCars');
   // Define the query parameters
   var params = {
     'email': email,
@@ -214,7 +214,7 @@ Future<int> returnCar(String email, String carNumber, String startDate, String e
 
 Future<int> updateCustomer(String firstName, String middleName, String lastName, String street, String city, String stateProvince, String country, String postalCode, String drivingLicenseId, String email, String phoneNumber) async {
   // Define the url of the api
-  var url = Uri.parse('http://192.168.56.1:8000/viewTables/availableCars');
+  var url = Uri.parse('http://localhost:8000/viewTables/availableCars');
   // Define the query parameters
   var params = {
     'firstName': firstName,
@@ -243,7 +243,7 @@ Future<int> updateCustomer(String firstName, String middleName, String lastName,
 
 Future<int> updateCar(String carNumber, String modelId, String email, bool  availability) async {
   // Define the url of the api
-  var url = Uri.parse('http://192.168.56.1:8000/viewTables/availableCars');
+  var url = Uri.parse('http://localhost:8000/viewTables/availableCars');
   // Define the query parameters
   var params = {
     'carNumber': carNumber,
@@ -265,7 +265,7 @@ Future<int> updateCar(String carNumber, String modelId, String email, bool  avai
 
 Future<int> addCustomer(String firstName, String middleName, String lastName, String street, String city, String stateProvince, String country, String postalCode, String drivingLicenseId, String email, String phoneNumber) async {
   // Define the url of the api
-  var url = Uri.parse('http://192.168.56.1:8000/viewTables/availableCars');
+  var url = Uri.parse('http://localhost:8000/viewTables/availableCars');
   // Define the query parameters
 
   var params = {
@@ -295,7 +295,7 @@ Future<int> addCustomer(String firstName, String middleName, String lastName, St
 
 Future<int> addCar(String carNumber, String modelId, String costPerDay, String numberOfPersons, String lateFee) async {
   // Define the url of the api
-  var url = Uri.parse('http://192.168.56.1:8000/viewTables/availableCars');
+  var url = Uri.parse('http://localhost:8000/viewTables/availableCars');
   // Define the query parameters
   var params = {
     'carNumber': carNumber,
@@ -318,7 +318,7 @@ Future<int> addCar(String carNumber, String modelId, String costPerDay, String n
 
 Future<int> deleteCustomer(String email) async {
   // Define the url of the api
-  var url = Uri.parse('http://192.168.56.1:8000/viewTables/availableCars');
+  var url = Uri.parse('http://localhost:8000/viewTables/availableCars');
   // Define the query parameters
   var params = {
     'email': email,
@@ -337,7 +337,7 @@ Future<int> deleteCustomer(String email) async {
 
 Future<int> deleteCar(String carNumber) async {
   // Define the url of the api
-  var url = Uri.parse('http://192.168.56.1:8000/viewTables/availableCars');
+  var url = Uri.parse('http://localhost:8000/viewTables/availableCars');
   // Define the query parameters
   var params = {
     'carNumber': carNumber,
@@ -356,7 +356,7 @@ Future<int> deleteCar(String carNumber) async {
 
 Future<List> getAvailableCars(String startDate, String endDate) async {
   // Define the url of the api
-  var url = Uri.parse('http://192.168.56.1:8000/viewTables/availableCars');
+  var url = Uri.parse('http://localhost:8000/viewTables/availableCars');
   // Define the query parameters
   var params = {
     'startDate': startDate,
@@ -376,7 +376,7 @@ Future<List> getAvailableCars(String startDate, String endDate) async {
 
 Future<List> getAvailableCarsByModel(String startDate, String endDate, String modelId) async {
   // Define the url of the api
-  var url = Uri.parse('http://192.168.56.1:8000/viewTables/availableCars');
+  var url = Uri.parse('http://localhost:8000/viewTables/availableCars');
   // Define the query parameters
   var params = {
     'startDate': startDate,

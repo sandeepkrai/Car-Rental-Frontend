@@ -75,7 +75,7 @@ class _signINState extends State<signIN> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: width * 0.045),
                 child: TextField(
-                  obscureText: (_passwordVisible) ? false : true,
+                  obscureText: (_passwordVisible) ? false : false,
                   style: TextStyle(color: Colors.white),
                   cursorColor: Colors.white,
                   focusNode: pass,
