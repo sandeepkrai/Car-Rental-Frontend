@@ -13,13 +13,15 @@ class addCar extends StatefulWidget {
 
 class _addCarState extends State<addCar> {
   @override
+
+  bool availability=false;
+
   Widget build(BuildContext context) {
     void openFile(PlatformFile file) {
       OpenFile.open(file.path!);
     }
-    TextEditingController carColor= TextEditingController();
-    FocusNode color=FocusNode();
-    TextEditingController modelName= TextEditingController();
+
+    TextEditingController modelId= TextEditingController();
     FocusNode model=FocusNode();
     TextEditingController carNumber= TextEditingController();
     FocusNode number=FocusNode();
@@ -72,10 +74,10 @@ class _addCarState extends State<addCar> {
                     cursorColor: Colors.white,
                     style: TextStyle(color: Colors.white),
                     focusNode: model,
-                    controller: modelName,
+                    controller: modelId,
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-                      labelText: 'Model Name',
+                      labelText: 'Model Id',
                       labelStyle: TextStyle(fontSize: height*0.02, fontWeight: FontWeight.bold, color: Colors.white),
                       enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
@@ -114,17 +116,23 @@ class _addCarState extends State<addCar> {
                 SizedBox(
                   height: height*0.018,
                 ),
+                Padding(padding: EdgeInsets.symmetric(horizontal: width*0.03),
+                  child: Text("Owner Details", style: GoogleFonts.ubuntu(textStyle: TextStyle(color: highlight, fontSize: width*0.06, )),),
+                ),
+                SizedBox(
+                  height: height*0.01,
+                ),
                 Padding(
                   padding:  EdgeInsets.symmetric(horizontal: width*0.03),
 
                   child: TextField(
                     cursorColor: Colors.white,
                     style: TextStyle(color: Colors.white),
-                    focusNode: color,
-                    controller: carColor,
+                    focusNode: f,
+                    controller: fname,
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-                      labelText: 'Color',
+                      labelText: 'First Name',
                       labelStyle: TextStyle(fontSize: height*0.02, fontWeight: FontWeight.bold, color: Colors.white),
                       enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
@@ -144,11 +152,35 @@ class _addCarState extends State<addCar> {
                   child: TextField(
                     cursorColor: Colors.white,
                     style: TextStyle(color: Colors.white),
-                    focusNode: kms,
-                    controller: kmsDriven,
+                    focusNode: m,
+                    controller: mname,
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-                      labelText: 'Kilometers Driven',
+                      labelText: 'Middle Name',
+                      labelStyle: TextStyle(fontSize: height*0.02, fontWeight: FontWeight.bold, color: Colors.white),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(width: 2, color: Colors.yellowAccent)),
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(width: 2, color: Colors.yellow)),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: height*0.018,
+                ),
+                Padding(
+                  padding:  EdgeInsets.symmetric(horizontal: width*0.03),
+
+                  child: TextField(
+                    cursorColor: Colors.white,
+                    style: TextStyle(color: Colors.white),
+                    focusNode: l,
+                    controller: lname,
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                      labelText: 'Last Name',
                       labelStyle: TextStyle(fontSize: height*0.02, fontWeight: FontWeight.bold, color: Colors.white),
                       enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
@@ -162,7 +194,6 @@ class _addCarState extends State<addCar> {
                 SizedBox(
                   height: height*0.02,
                 ),
-
                 SizedBox(
                   height: height*0.02,
                 ),
@@ -279,244 +310,81 @@ class _addCarState extends State<addCar> {
                 SizedBox(
                   height: height*0.02,
                 ),
+
+                SizedBox(
+                  height: height*0.02,
+                ),
                 Padding(padding: EdgeInsets.symmetric(horizontal: width*0.03),
-                  child: Text("Car Photos", style: GoogleFonts.ubuntu(textStyle: TextStyle(color: highlight, fontSize: width*0.06, )),),
+                  child: Text("Availability", style: GoogleFonts.ubuntu(textStyle: TextStyle(color: highlight, fontSize: width*0.06, )),),
                 ),
                 SizedBox(
-                  height: height*0.01,
+                  height: height*0.014,
                 ),
-                Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: width*0.03),
-                  child: GestureDetector(
-                    onTap: () async{
-                      final result = await FilePicker.platform.pickFiles();
-                      if (result == null) {
-                        return;
-                      }
-                      final file = result.files.first;
-                      //openFile(file);
-                      final path = file.path;
-                      final filename = file.name;
-                      showDialog(
-                          context: context,
-                          barrierDismissible: true,
-                          barrierColor:
-                          Colors.black.withOpacity(0.6),
-                          builder: (BuildContext context) =>
-                              Dialog(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius:
-                                    BorderRadius.circular(
-                                        50.0)),
-                                //this right here
-                                child: Container(
-                                  // height: height*0.5,
-                                  width: width, //*0.8,
-                                  //color: Color(0xFFF7FCFF),
-                                  padding: EdgeInsets.only(
-                                      bottom: height * 0.05),
-                                  decoration: BoxDecoration(
-                                      color:
-                                      const Color(0xFFF7FCFF),
-                                      borderRadius:
-                                      BorderRadius.circular(
-                                          50.0)),
-                                  child: Column(
-                                    mainAxisSize:
-                                    MainAxisSize.min,
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.start,
-                                    children: <Widget>[
-                                      Padding(
-                                          padding: EdgeInsets
-                                              .symmetric(
-                                              vertical:
-                                              height *
-                                                  0.03)),
-                                      Image.asset(
-                                        "assets/images/folder.png",
-                                        scale: 2,
-                                      ),
-                                      Padding(
-                                          padding: EdgeInsets
-                                              .symmetric(
-                                              vertical:
-                                              height *
-                                                  0.004)),
-                                      Text(
-                                        filename.toString(),
-                                        style: TextStyle(
-                                            color:
-                                            Color(0xff1F1F1F),
-                                            fontSize:
-                                            width * 0.06,
-                                            fontWeight:
-                                            FontWeight.w500),
-                                      ),
-                                      Padding(
-                                          padding: EdgeInsets
-                                              .symmetric(
-                                              vertical:
-                                              height *
-                                                  0.03)),
-                                      Container(
-                                        margin:
-                                        EdgeInsets.symmetric(
-                                            horizontal:
-                                            width * 0.1),
-                                        child: Text(
-                                          "Are you sure you want to upload these photos?",
-                                          style: TextStyle(
-                                              color: Color(
-                                                  0xFF0957DE),
-                                              fontSize:
-                                              width * 0.05,
-                                              fontWeight:
-                                              FontWeight
-                                                  .w500),
-                                          textAlign:
-                                          TextAlign.center,
-                                        ),
-                                      ),
-                                      Padding(
-                                          padding: EdgeInsets
-                                              .symmetric(
-                                              vertical:
-                                              height *
-                                                  0.04)),
-                                      Row(
-                                        mainAxisAlignment:
-                                        MainAxisAlignment
-                                            .spaceEvenly,
-                                        children: [
-                                          Container(
-                                            width: width * 0.3,
-                                            child: ElevatedButton(
-                                              onPressed: () {
-                                                openFile(file);
-                                              },
-                                              child: Text(
-                                                'View File',
-                                                style: TextStyle(
-                                                    fontSize:
-                                                    width *
-                                                        0.04),
-                                              ),
-                                              style: ButtonStyle(
-                                                  backgroundColor:
-                                                  MaterialStateProperty.all(Theme.of(context)
-                                                      .colorScheme
-                                                      .primary),
-                                                  padding: MaterialStateProperty.all(
-                                                      EdgeInsets.all(
-                                                          height *
-                                                              0.017)),
-                                                  shape: MaterialStateProperty.all(
-                                                      RoundedRectangleBorder(
-                                                          borderRadius: BorderRadius.circular(
-                                                              10))),
-                                                  elevation:
-                                                  MaterialStateProperty.all(
-                                                      05)),
-                                            ),
-                                          ),
-                                          Container(
-                                            width: width * 0.3,
-                                            child: ElevatedButton(
-                                              onPressed: () {
-                                                Navigator.pop(
-                                                    context);
-                                              },
-                                              child:  Text(
-                                                'Upload ',
-                                                style: TextStyle(
-                                                    fontSize:
-                                                    width *
-                                                        0.04),
-                                              ),
-                                              style: ButtonStyle(
-                                                  backgroundColor:
-                                                  MaterialStateProperty.all(Theme.of(context)
-                                                      .colorScheme
-                                                      .primary),
-                                                  padding: MaterialStateProperty.all(
-                                                      EdgeInsets.all(
-                                                          height *
-                                                              0.017)),
-                                                  shape: MaterialStateProperty.all(
-                                                      RoundedRectangleBorder(
-                                                          borderRadius: BorderRadius.circular(
-                                                              10))),
-                                                  elevation:
-                                                  MaterialStateProperty.all(
-                                                      05)),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Padding(
-                                          padding: EdgeInsets
-                                              .symmetric(
-                                              vertical:
-                                              height *
-                                                  0.006)),
-                                      Container(
-                                        width: width * 0.68,
-                                        child: ElevatedButton(
-                                          onPressed: () {
-                                            Navigator.pop(
-                                                context);
-                                          },
-                                          child: Text(
-                                            'Cancel',
-                                            style: TextStyle(
-                                                fontSize:
-                                                width * 0.04),
-                                          ),
-                                          style: ButtonStyle(
-                                              backgroundColor:
-                                              MaterialStateProperty.all(
-                                                  Colors.red),
-                                              padding: MaterialStateProperty.all(
-                                                  EdgeInsets.all(
-                                                      height *
-                                                          0.017)),
-                                              shape: MaterialStateProperty.all(
-                                                  RoundedRectangleBorder(
-                                                      borderRadius:
-                                                      BorderRadius.circular(
-                                                          10))),
-                                              elevation:
-                                              MaterialStateProperty.all(05)),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              )
-                      );
-
-                    },
-                    child: Container(
-                      width: width,
-                      height: height*0.05,
-                      decoration: BoxDecoration(
-                          color: Colors.transparent,
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: highlight, width: 2)
-                      ),
-                      child: Center(
+                Padding(padding: EdgeInsets.symmetric(horizontal: width*0.03),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      GestureDetector(
+                        onTap: (){
+                          setState(() {
+                            availability=true;
+                          });
+                        },
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            Text("Upload ",style: GoogleFonts.ubuntu(textStyle: TextStyle(color: Colors.white, fontSize: height*0.02, fontWeight: FontWeight.bold)),),
-                            Icon(Icons.upload, color: Colors.white,)
+                            Text("Available", style: TextStyle(color: highlight, fontSize: width*0.04),),
+                            SizedBox(
+                              width: width*0.02,
+                            ),
+                            Container(
+
+                              height: height*0.02,
+                              width: height*0.02,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(color: highlight, width: 2),
+                                color: (availability == true)? highlight: Colors.transparent, // Customize the color of the button
+                              ),
+                            ),
                           ],
                         ),
                       ),
-                    ),
+                      GestureDetector(
+                        onTap: (){
+                          setState(() {
+                            availability=false;
+                          });
+                        },
+                        child: Row(
+                          children: [
+                            Text("Not Available", style: TextStyle(color: highlight, fontSize: width*0.04),),
+                            SizedBox(
+                              width: width*0.02,
+                            ),
+                            Container(
+
+                              height: height*0.02,
+                              width: height*0.02,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(color: highlight, width: 2),
+                                color: (availability == false)? highlight: Colors.transparent,
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
                   ),
                 ),
+
+
+
+                SizedBox(
+                  height: height*0.02,
+                ),
+
                 SizedBox(
                   height: height*0.02,
                 ),
