@@ -293,16 +293,20 @@ Future<int> addCustomer(String firstName, String middleName, String lastName, St
   return data;
 }
 
-Future<int> addCar(String carNumber, String modelId, String costPerDay, String numberOfPersons, String lateFee) async {
+
+// function to call lend car api
+Future<int> addCar(String carNumber, String modelId, bool  availabilityCarFlag, String   ownerFirstName, String ownerMiddleName, String ownerLastName, String email) async {
   // Define the url of the api
-  var url = Uri.parse('http://192.168.56.1:8000/viewTables/availableCars');
+  var url = Uri.parse('http://');
   // Define the query parameters
   var params = {
     'carNumber': carNumber,
     'modelId': modelId,
-    'costPerDay': costPerDay,
-    'numberOfPersons': numberOfPersons,
-    'lateFee': lateFee,
+    'availabilityCarFlag': availabilityCarFlag,
+    'ownerFirstName': ownerFirstName,
+    'ownerMiddleName': ownerMiddleName,
+    'ownerLastName': ownerLastName,
+    'email': email,
   };
   // Encode the query parameters
   var query = Uri(queryParameters: params).query;
@@ -315,6 +319,9 @@ Future<int> addCar(String carNumber, String modelId, String costPerDay, String n
   // Return the result as an integer
   return data;
 }
+
+
+
 
 Future<int> deleteCustomer(String email) async {
   // Define the url of the api
