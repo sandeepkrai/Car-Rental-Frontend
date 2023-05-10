@@ -1,5 +1,6 @@
 import 'package:dbs_project/Constants/constantColors.dart';
 import 'package:dbs_project/Utils/car.dart';
+import 'package:dbs_project/views/updateVehicleDeatils.dart';
 import 'package:flutter/material.dart';
 
 class carPage extends StatefulWidget {
@@ -594,9 +595,11 @@ class _carPageState extends State<carPage> {
                           //     insuaranceCode!,
                           //     couponCode!);
                         }
-                      : () {},
+                      : () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => updateVehicleDetails()));
+                  },
                   child: Text(
-                    (widget.page_no == 0) ? "BOOK" : "DELETE VEHICLE",
+                    (widget.page_no == 0) ? "BOOK" : "Update Vehicle Details",
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: height * 0.0278,

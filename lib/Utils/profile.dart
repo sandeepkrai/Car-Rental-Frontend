@@ -208,7 +208,7 @@ class _profileState extends State<profile> {
                     );
                   },
                   child: Text(
-                    "Upcoming Bookings",
+                    "Bookings",
                     style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
