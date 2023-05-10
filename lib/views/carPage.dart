@@ -27,9 +27,71 @@ class carPage extends StatefulWidget {
 class _carPageState extends State<carPage> {
   String? couponCode;
   String? insuaranceCode;
+  DateTime? _pickupDate;
+  DateTime? _dropDate;
+  String? _selectedPickupTime;
+  String? _selectedDropTime;
+
 
   @override
   Widget build(BuildContext context) {
+
+    void _pickupDatePicker() {
+      showDatePicker(
+          context: context,
+          initialDate: DateTime.now(),
+          firstDate: DateTime.now(),
+          lastDate: DateTime(DateTime.now().year + 2))
+          .then((value) {
+        setState(() {
+          _pickupDate = value;
+          print(_pickupDate);
+        });
+      });
+    }
+
+    void _dropDatePicker() {
+      showDatePicker(
+          context: context,
+          initialDate: DateTime.now(),
+          firstDate: DateTime.now(),
+          lastDate: DateTime(DateTime.now().year + 2))
+          .then((value) {
+        setState(() {
+          _dropDate = value;
+        });
+      });
+    }
+
+    Future<void> _showPickupTimePicker() async {
+      final TimeOfDay? result =
+      await showTimePicker(context: context, initialTime: TimeOfDay.now());
+      if (result != null) {
+        setState(() {
+          String hour= result.hour.toString();
+          String min= result.minute.toString();
+          _selectedPickupTime = hour+":"+min+":00";
+        });
+      }
+    }
+
+    // We don't need to pass a context to the _show() function
+    // You can safety use context as below
+
+
+    Future<void> _showDropTimePicker() async {
+      final TimeOfDay? result1 =
+      await showTimePicker(context: context, initialTime: TimeOfDay.now());
+      if (result1 != null) {
+        String hour= result1.hour.toString();
+        String min= result1.minute.toString();
+        setState(() {
+
+
+          _selectedDropTime = hour+":"+min+":00";
+        });
+      }
+    }
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
 
@@ -268,11 +330,250 @@ class _carPageState extends State<carPage> {
                 ],
               ),
             ):
-                Container(height: 0,)
-            ,
+                Container(height: 0,),
             SizedBox(
               height: height*0.03,
             ),
+            (widget.page_no==0)?
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: width * 0.0, vertical: height*0.01),
+              margin: EdgeInsets.symmetric(horizontal: width * 0.1),
+              decoration: BoxDecoration(
+                  color: background2,
+
+                  borderRadius: BorderRadius.circular(10)
+              ),
+              child: Column(
+                children: [
+                  Container(
+
+                    height: height * 0.09,
+                    width: width,
+                    color: Colors.transparent,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                          vertical: height * 0.01,
+                          horizontal: width * 0.02),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          GestureDetector(
+                            onTap: _pickupDatePicker,
+                            child: Container(
+                                height: height * 0.2,
+                                width: width * 0.35,
+                                decoration: BoxDecoration(
+                                    color: background,
+                                    borderRadius:
+                                    BorderRadius.circular(20)),
+                                child: Center(
+                                    child: (_pickupDate.toString() !=
+                                        "null")
+                                        ? Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          "From: ",
+                                          style: TextStyle(
+                                              color: text,
+                                              fontSize:
+                                              height * 0.0178,
+                                              fontWeight:
+                                              FontWeight.w600),
+                                        ),
+                                        Text(
+                                          _pickupDate!.day
+                                              .toString() +
+                                              "/" +
+                                              _pickupDate!.month
+                                                  .toString() +
+                                              "/" +
+                                              _pickupDate!.year
+                                                  .toString(),
+                                          style: TextStyle(
+                                              color: text,
+                                              fontSize:
+                                              height * 0.0178,
+                                              fontWeight:
+                                              FontWeight.w400),
+                                        )
+                                      ],
+                                    )
+                                        : Text("Pickup Date",
+                                        style: TextStyle(
+                                            color: text,
+                                            fontSize: height * 0.0178,
+                                            fontWeight:
+                                            FontWeight.w600)))),
+                          ),
+                          SizedBox(
+                            width: width * 0.03,
+                          ),
+                          GestureDetector(
+                            onTap: _dropDatePicker,
+                            child: Container(
+                                height: height * 0.2,
+                                width: width * 0.35,
+                                decoration: BoxDecoration(
+                                    color: background,
+                                    borderRadius:
+                                    BorderRadius.circular(20)),
+                                child: Center(
+                                    child: (_dropDate.toString() != "null")
+                                        ? Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          "To: ",
+                                          style: TextStyle(
+                                              color: text,
+                                              fontSize:
+                                              height * 0.0178,
+                                              fontWeight:
+                                              FontWeight.w600),
+                                        ),
+                                        Text(
+                                          _dropDate!.day.toString() +
+                                              "/" +
+                                              _dropDate!.month
+                                                  .toString() +
+                                              "/" +
+                                              _dropDate!.year
+                                                  .toString(),
+                                          style: TextStyle(
+                                              color: text,
+                                              fontSize:
+                                              height * 0.0178,
+                                              fontWeight:
+                                              FontWeight.w400),
+                                        )
+                                      ],
+                                    )
+                                        : Text("Drop Date",
+                                        style: TextStyle(
+                                            color: text,
+                                            fontSize: height * 0.0178,
+                                            fontWeight:
+                                            FontWeight.w600)))),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(
+
+                    height: height * 0.09,
+                    width: width,
+                    color: Colors.transparent,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                          vertical: height * 0.01,
+                          horizontal: width * 0.02),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          GestureDetector(
+                            onTap: _showPickupTimePicker,
+                            child: Container(
+                                height: height * 0.2,
+                                width: width * 0.35,
+                                decoration: BoxDecoration(
+                                    color: background,
+                                    borderRadius:
+                                    BorderRadius.circular(20)),
+                                child: Center(
+                                    child: (_selectedPickupTime != null)
+                                        ? Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          "Pickup: ",
+                                          style: TextStyle(
+                                              color: text,
+                                              fontSize:
+                                              height * 0.0178,
+                                              fontWeight:
+                                              FontWeight.w600),
+                                        ),
+                                        Text(
+                                          _selectedPickupTime!,
+                                          style: TextStyle(
+                                              color: text,
+                                              fontSize:
+                                              height * 0.0178,
+                                              fontWeight:
+                                              FontWeight.w400),
+                                        )
+                                      ],
+                                    )
+                                        : Text("Pickup Time",
+                                        style: TextStyle(
+                                            color: text,
+                                            fontSize: height * 0.0178,
+                                            fontWeight:
+                                            FontWeight.w600)))),
+                          ),
+                          SizedBox(
+                            width: width * 0.03,
+                          ),
+                          GestureDetector(
+                            onTap: _showDropTimePicker,
+                            child: Container(
+
+                                height: height * 0.2,
+                                width: width * 0.35,
+                                decoration: BoxDecoration(
+                                    color: background,
+                                    borderRadius:
+                                    BorderRadius.circular(20)),
+                                child: Center(
+                                    child: (_selectedDropTime != null)
+                                        ? Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          "Drop: ",
+                                          style: TextStyle(
+                                              color: text,
+                                              fontSize:
+                                              height * 0.0178,
+                                              fontWeight:
+                                              FontWeight.w600),
+                                        ),
+                                        Text(
+                                          _selectedDropTime!,
+                                          style: TextStyle(
+                                              color: text,
+                                              fontSize:
+                                              height * 0.0178,
+                                              fontWeight:
+                                              FontWeight.w400),
+                                        )
+                                      ],
+                                    )
+                                        : Text("Drop Time",
+                                        style: TextStyle(
+                                            color: text,
+                                            fontSize: height * 0.0178,
+                                            fontWeight:
+                                            FontWeight.w600)))),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                ],
+              ),
+            ):
+            Container()
+        ,
+
+
             SizedBox(
               height: height * 0.03,
             ),
@@ -282,16 +583,20 @@ class _carPageState extends State<carPage> {
                 width: width,
                 child: ElevatedButton(
                   onPressed: (widget.page_no == 0)
-                      ? () {
-                          // Call this booking function Future<int> bookCar(String renterEmail, String startTime, String endTime,String carNumber, String insuranceName, String discountCode)
-                          // and pass the required parameters
-                          bookCar(
-                              emailId,
-                              '2023-05-01 08:00:00',
-                              '2023-05-01 08:00:00',
-                              car.car_number,
-                              insuaranceCode!,
-                              couponCode!);
+                      ? () async{
+
+                          String drop=_dropDate.toString().substring(0,10)+" "+_selectedDropTime!;
+                          String pickup=_pickupDate.toString().substring(0,10)+" "+_selectedPickupTime!;
+
+
+                          // bookCar(
+                          //     emailId,
+
+                          //     '2023-05-01 08:00:00',
+                          //     '2023-05-01 08:00:00',
+                          //     car.car_number,
+                          //     insuaranceCode!,
+                          //     couponCode!);
                         }
                       : () {},
                   child: Text(
@@ -416,3 +721,4 @@ Dialog showCustomDialog(BuildContext c2) {
     ),
   );
 }
+
