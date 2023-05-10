@@ -6,6 +6,11 @@ import 'package:dbs_project/views/homescreen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+final List<Car> _availabeCars = [];
+void fetchAvailableCars() async {
+  _availabeCars.clear();
+  _availabeCars.addAll(await fetchCars());
+}
 
 class rent extends StatefulWidget {
   rent({Key? key}) : super(key: key);
@@ -15,8 +20,6 @@ class rent extends StatefulWidget {
 }
 
 class _rentState extends State<rent> {
-  final List<Car> _availabeCars = [];
-
   @override
   DateTime? _pickupDate;
 
@@ -31,60 +34,9 @@ class _rentState extends State<rent> {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
 
-    void fetchAvailableCars() async {
-      _availabeCars.clear();
-      _availabeCars.addAll(await fetchCars());
+    Future.delayed(Duration(seconds: 2), () async {
       setState(() {});
-    }
-
-    void _pickupDatePicker() {
-      showDatePicker(
-              context: context,
-              initialDate: DateTime.now(),
-              firstDate: DateTime.now(),
-              lastDate: DateTime(DateTime.now().year + 2))
-          .then((value) {
-        setState(() {
-          _pickupDate = value;
-          print(_pickupDate);
-        });
-      });
-    }
-
-    void _dropDatePicker() {
-      showDatePicker(
-              context: context,
-              initialDate: DateTime.now(),
-              firstDate: DateTime.now(),
-              lastDate: DateTime(DateTime.now().year + 2))
-          .then((value) {
-        setState(() {
-          _dropDate = value;
-        });
-      });
-    }
-
-    Future<void> _showPickupTimePicker() async {
-      final TimeOfDay? result =
-          await showTimePicker(context: context, initialTime: TimeOfDay.now());
-      if (result != null) {
-        setState(() {
-          _selectedPickupTime = result.format(context);
-        });
-      }
-    }
-
-    // We don't need to pass a context to the _show() function
-    // You can safety use context as below
-    Future<void> _showDropTimePicker() async {
-      final TimeOfDay? result1 =
-          await showTimePicker(context: context, initialTime: TimeOfDay.now());
-      if (result1 != null) {
-        setState(() {
-          _selectedDropTime = result1.format(context);
-        });
-      }
-    }
+    });
 
     return SingleChildScrollView(
       child: Container(
@@ -96,9 +48,6 @@ class _rentState extends State<rent> {
             color: background,
             child: Column(
               children: [
-
-
-
                 SizedBox(
                   height: height * 0.02,
                 ),
@@ -145,7 +94,7 @@ class _rentState extends State<rent> {
                 ),
                 SizedBox(
                     child: CarGridView(
-                      page_no: 0,
+                  page_no: 0,
                   n: n,
                   cars: _availabeCars,
                 ))

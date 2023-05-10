@@ -1,5 +1,6 @@
 import 'package:dbs_project/Utils/customer.dart';
 import 'package:dbs_project/Utils/lend.dart';
+import 'package:dbs_project/Utils/rent.dart';
 import 'package:dbs_project/controller/functions.dart';
 import 'package:dbs_project/views/homescreen.dart';
 import 'package:dbs_project/views/signUp.dart';
@@ -124,7 +125,7 @@ class _signINState extends State<signIN> {
                     print(await checkLogin(username.text, password.text));
                     if (await checkLogin(username.text, password.text) == 1) {
                       customer = await fetchCustomer(username.text);
-
+                      fetchAvailableCars();
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute<void>(
