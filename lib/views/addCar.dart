@@ -1,4 +1,5 @@
 import 'package:dbs_project/Constants/constantColors.dart';
+import 'package:dbs_project/controller/functions.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -394,6 +395,10 @@ class _addCarState extends State<addCar> {
                   padding:  EdgeInsets.symmetric(horizontal: width*0.035),
                   child: ElevatedButton(
                     onPressed: (){
+
+                      // call this function with the values from textcontroller Future<int> addCar(String carNumber, String numberOfPersons,String numberOfLuggage, String costPerDay, String lateFeePerHour,String availabilityCarFlag, String ownerFirstName, String ownerMiddleName,String ownerLastName, String email)
+                      addNewCar(carNumber.text, noOfPassengers.text, noOfLuggage.text, cost_per_day.text, late_fee.text, availability.toString(), fname.text, mname.text, lname.text, emailId);
+
                       Navigator.pop(context);
                     },
                     style: ButtonStyle(

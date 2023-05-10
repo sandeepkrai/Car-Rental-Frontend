@@ -572,3 +572,39 @@ Future<List> getInsurance() async {
   print(response.body);
   return jsonDecode(response.body);
 }
+
+
+// Function to add new car by calling this api router.get("/lendCar", function (req, res, next) {var query = "CALL lendd_cars('" +req.query.carNumber +"', '" +req.query.numberOfPersons +"'," +req.query.numberOfLuggage +"', '" +req.query.costPerDay +
+//"', '" +req.query.lateFeePerHour +"', '" +req.query.availabilityCarFlag + "', '" +req.query.ownerFirstName +"', '" +req.query.ownerMiddleName +"', '" +req.query.ownerLastName +"', '" +req.query.email +"')";
+
+Future<int> addNewCar(String carNumber, String numberOfPersons,
+    String numberOfLuggage, String costPerDay, String lateFeePerHour,
+    String availabilityCarFlag, String ownerFirstName, String ownerMiddleName,
+    String ownerLastName, String email) async {
+  // Define the url of the api
+  var url = Uri.parse('http://');
+  // Define the query parameters
+  var params = {
+    'carNumber': carNumber,
+    'numberOfPersons': numberOfPersons,
+    'numberOfLuggage': numberOfLuggage,
+    'costPerDay': costPerDay,
+    'lateFeePerHour': lateFeePerHour,
+    'availabilityCarFlag': availabilityCarFlag,
+    'ownerFirstName': ownerFirstName,
+    'ownerMiddleName': ownerMiddleName,
+    'ownerLastName': ownerLastName,
+    'email': email,
+  };
+  // Encode the query parameters
+  var query = Uri(queryParameters: params).query;
+  // Append the query to the url
+  var fullUrl = url.replace(query: query);
+  // Make a get request to the api
+  var response = await http.get(fullUrl);
+  // Decode the response body as json
+  var data = jsonDecode(response.body);
+  // Return the result as an integer
+  return data;
+}
+

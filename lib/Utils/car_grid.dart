@@ -11,7 +11,8 @@ List<String> insuarance = [];
 Future<void> getInsuranceCoupon() async {
   var data1 = await getCoupons();
   var data2 = await getInsurance();
-
+  coupon.clear();
+  insuarance.clear();
   for (var i in data1) {
     coupon.add(i['discount_code'].toString());
   }
@@ -21,7 +22,8 @@ Future<void> getInsuranceCoupon() async {
 }
 
 class CarGridView extends StatelessWidget {
-  CarGridView({Key? key, required this.n, required this.cars, required this.page_no})
+  CarGridView(
+      {Key? key, required this.n, required this.cars, required this.page_no})
       : super(key: key);
   final int n;
   final int page_no;
