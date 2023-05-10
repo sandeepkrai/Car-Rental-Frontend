@@ -1,10 +1,6 @@
 import 'package:dbs_project/Constants/constantColors.dart';
 import 'package:dbs_project/Utils/car.dart';
-import 'package:dbs_project/controller/functions.dart';
 import 'package:flutter/material.dart';
-import 'package:line_icons/line_icon.dart';
-
-import 'homescreen.dart';
 
 class carPage extends StatefulWidget {
   carPage(
