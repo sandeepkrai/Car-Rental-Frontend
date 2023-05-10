@@ -5,9 +5,10 @@ import 'package:dbs_project/views/homescreen.dart';
 import 'package:flutter/material.dart';
 
 class CarGridView extends StatelessWidget {
-  CarGridView({Key? key, required this.n, required this.cars})
+  CarGridView({Key? key, required this.n, required this.cars, required this.page_no})
       : super(key: key);
   final int n;
+  final int page_no;
   final List<Car> cars;
   @override
   Widget build(BuildContext context) {
@@ -33,7 +34,7 @@ class CarGridView extends StatelessWidget {
                 MaterialPageRoute(
                     builder: (context) => carPage(
                           car: cars[index],
-                          page_no: 0,
+                          page_no: page_no,
                         )));
           },
           child: Container(

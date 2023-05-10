@@ -48,15 +48,14 @@ class _lendState extends State<lend> {
         hoverColor: Colors.yellowAccent,
       ),
       backgroundColor: background,
-      body: Stack(
-        children: [
-          SingleChildScrollView(
-              child: SizedBox(
-                  child: CarGridView(
-            n: 2,
-            cars: _cars,
-          ))),
-        ],
+      body: SafeArea(
+        child: SingleChildScrollView(
+            child: SizedBox(
+                child: CarGridView(
+                  page_no: 1,
+          n: 2,
+          cars: _cars,
+        ))),
       ),
     );
   }

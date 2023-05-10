@@ -10,6 +10,76 @@ final List<Booking> bookings;
 }
 
 class _upcomingBookingsState extends State<upcomingBookings> {
+
+  int i=0;
+  void change_state(int n)
+  {
+    setState(() {
+      i=n;
+    });
+  }
+
+  Future<void> showTemrsDialog(BuildContext context) async {
+    var width = MediaQuery.of(context).size.width;
+    var height = MediaQuery.of(context).size.height;
+    bool? check1 = false;
+    bool? check2 = false;
+    bool? check3 = false;
+    Color one= background2;
+
+    return await showDialog(
+        context: context,
+        barrierDismissible: true,
+        barrierColor: Colors.black.withOpacity(0.6),
+        builder: (BuildContext context) =>
+            StatefulBuilder(builder: (context, setState) {
+
+              return Dialog(
+
+                elevation: 10,
+                backgroundColor: background,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.0)),
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: width*0.05, vertical: height*0.035),
+                  height: height*0.2,
+                  width: width,
+                  child: Container(
+                    width: width,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text("Please enter rating!!", style: TextStyle(color: highlight, fontSize: height*0.025, fontWeight: FontWeight.bold),),
+                        SizedBox(
+                          height: height*0.01,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            IconButton(onPressed: (){
+                              one=highlight;
+                            }, icon: Icon(Icons.star, size: height*0.05,color:  one,)),
+                            IconButton(onPressed: (){
+                            }, icon: Icon(Icons.star, size: height*0.05,color:  (i >= 2)? highlight:background2,)),
+                            IconButton(onPressed: (){}, icon: Icon(Icons.star, size: height*0.05,color:  (i >= 3)? highlight:background2,)),
+                            IconButton(onPressed: (){}, icon: Icon(Icons.star, size: height*0.05,color:  (i >= 4)? highlight:background2,)),
+                            IconButton(onPressed: (){}, icon: Icon(Icons.star, size: height*0.05,color:  (i >= 5)? highlight:background2,)),
+
+                          ],
+                        )
+
+
+                      ],
+                    ),
+                  ),
+                ),
+              );
+
+            }));
+  }
+
+
   @override
   Widget build(BuildContext context) {
    
@@ -17,7 +87,7 @@ class _upcomingBookingsState extends State<upcomingBookings> {
     var width= MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(backgroundColor: background2,
-        title: Text("Upcoming Bookings", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+        title: Text("Bookings", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
       ),
       backgroundColor: background,
       body: ListView.builder(
@@ -30,19 +100,12 @@ class _upcomingBookingsState extends State<upcomingBookings> {
                 borderRadius: BorderRadius.all(Radius.circular(10))
               ),
               child: ListTile(
-
+                  onTap: (){
+                      //showDialog(context: context, builder: (context) => showCustomDialog(context, 0) );
+                    showTemrsDialog(context);
+                  },  
                   leading: const Icon(Icons.list, color: Colors.white,),
-                  trailing: GestureDetector(
-                    onTap: (){},
-                    child: Container(
-                      padding: EdgeInsets.all(height*0.009),
-                      decoration: BoxDecoration(
-                        color: Colors.red,
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      child: Icon(Icons.delete, color: Colors.white,),
-                    ),
-                  ),
+
                   title: Text(widget.bookings[index].name+" ("+widget.bookings[index].car_number+")", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: height*0.02),),
                   subtitle: Row(
                     children: [
@@ -71,4 +134,111 @@ class Booking {
   final DateTime startDate ;
 
   Booking({required this.name,   required this.cost, required this.car_number, required this.startDate });
+}
+
+Dialog showCustomDialog(BuildContext c2, int i)
+{
+  var height= MediaQuery.of(c2).size.height;
+  var width= MediaQuery.of(c2).size.width;
+
+  return Dialog(
+    elevation: 10,
+    backgroundColor: background,
+    shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(30.0)),
+    child: Container(
+      padding: EdgeInsets.symmetric(horizontal: width*0.05, vertical: height*0.035),
+      height: height*0.2,
+      width: width,
+      child: Container(
+        width: width,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text("Please enter rating!!", style: TextStyle(color: highlight, fontSize: height*0.025, fontWeight: FontWeight.bold),),
+            SizedBox(
+              height: height*0.01,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IconButton(onPressed: (){
+                  i=1;
+                }, icon: Icon(Icons.star, size: height*0.05,color:  (i >= 1)? highlight:background2,)),
+                IconButton(onPressed: (){
+                  showDialog(context: c2, builder: (context) => showCustomDialog(context, 1) );
+                }, icon: Icon(Icons.star, size: height*0.05,color:  (i >= 2)? highlight:background2,)),
+                IconButton(onPressed: (){}, icon: Icon(Icons.star, size: height*0.05,color:  (i >= 3)? highlight:background2,)),
+                IconButton(onPressed: (){}, icon: Icon(Icons.star, size: height*0.05,color:  (i >= 4)? highlight:background2,)),
+                IconButton(onPressed: (){}, icon: Icon(Icons.star, size: height*0.05,color:  (i >= 5)? highlight:background2,)),
+
+              ],
+            )
+
+
+          ],
+        ),
+      ),
+    ),
+  );
+
+}
+
+Future<void> showTemrsDialog(BuildContext context) async {
+  var width = MediaQuery.of(context).size.width;
+  var height = MediaQuery.of(context).size.height;
+  bool? check1 = false;
+  bool? check2 = false;
+  bool? check3 = false;
+  int i=0;
+
+  return await showDialog(
+      context: context,
+      barrierDismissible: true,
+      barrierColor: Colors.black.withOpacity(0.6),
+      builder: (BuildContext context) =>
+          StatefulBuilder(builder: (context, setState) {
+            return Dialog(
+              elevation: 10,
+              backgroundColor: background,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.0)),
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: width*0.05, vertical: height*0.035),
+                height: height*0.2,
+                width: width,
+                child: Container(
+                  width: width,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text("Please enter rating!!", style: TextStyle(color: highlight, fontSize: height*0.025, fontWeight: FontWeight.bold),),
+                      SizedBox(
+                        height: height*0.01,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          IconButton(onPressed: (){
+
+                          }, icon: Icon(Icons.star, size: height*0.05,color:  (i >= 1)? highlight:background2,)),
+                          IconButton(onPressed: (){
+                          }, icon: Icon(Icons.star, size: height*0.05,color:  (i >= 2)? highlight:background2,)),
+                          IconButton(onPressed: (){}, icon: Icon(Icons.star, size: height*0.05,color:  (i >= 3)? highlight:background2,)),
+                          IconButton(onPressed: (){}, icon: Icon(Icons.star, size: height*0.05,color:  (i >= 4)? highlight:background2,)),
+                          IconButton(onPressed: (){}, icon: Icon(Icons.star, size: height*0.05,color:  (i >= 5)? highlight:background2,)),
+
+                        ],
+                      )
+
+
+                    ],
+                  ),
+                ),
+              ),
+            );
+
+          }));
 }

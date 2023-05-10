@@ -145,6 +145,7 @@ class _rentState extends State<rent> {
                 ),
                 SizedBox(
                     child: CarGridView(
+                      page_no: 0,
                   n: n,
                   cars: _availabeCars,
                 ))
