@@ -449,19 +449,20 @@ Future<List> getAvailableCarsByModel(
 //   //return jsonDecode(response.body);
 // }
 
-// Book a car
-Future<int> bookCar(String carNumber, String email, String startDate,
-    String endDate, String insuranceId, String discountId) async {
+// Function to book car by calling this api router.get("/bookCar", function (req, res, next) {
+// Get the input parameters from the request query parametersvar renterEmail = req.query.renterEmail;var startTime = req.query.startTime;var endTime = req.query.endTime;var carNumber = req.query.carNumber;var insuranceName = req.query.insuranceName;var discountCode = req.query.discountCode;
+Future<int> bookCar(String renterEmail, String startTime, String endTime,
+    String carNumber, String insuranceName, String discountCode) async {
   // Define the url of the api
-  var url = Uri.parse('http://');
+  var url = Uri.parse('http://192.168.56.1:8000/viewTables/bookCar');
   // Define the query parameters
   var params = {
+    'renterEmail': renterEmail,
+    'startTime': startTime,
+    'endTime': endTime,
     'carNumber': carNumber,
-    'email': email,
-    'startDate': startDate,
-    'endDate': endDate,
-    'insuranceId': insuranceId,
-    'discountId': discountId,
+    'insuranceName': insuranceName,
+    'discountCode': discountCode,
   };
   // Encode the query parameters
   var query = Uri(queryParameters: params).query;
@@ -520,6 +521,43 @@ Future<List> getCustomerBooking(String email) async {
 Future<List> getCustomerCars() async {
   // Define the url of the api
   var url = Uri.parse('http://192.168.56.1:8000/viewTables/getCustomerCars');
+  // Define the query parameters
+  var params = {
+    'email': emailId,
+  };
+  // Encode the query parameters
+  var query = Uri(queryParameters: params).query;
+  // Append the query to the url
+  var fullUrl = url.replace(query: query);
+  // Make a get request to the api
+  var response = await http.get(fullUrl);
+  // Decode the response body as json
+  print(response.body);
+  return jsonDecode(response.body);
+}
+
+// Get all available coupons
+Future<List> getCoupons() async {
+  // Define the url of the api
+  var url = Uri.parse('http://192.168.56.1:8000/viewTables/discount');
+  // Define the query parameters
+  var params = {
+    'email': emailId,
+  };
+  // Encode the query parameters
+  var query = Uri(queryParameters: params).query;
+  // Append the query to the url
+  var fullUrl = url.replace(query: query);
+  // Make a get request to the api
+  var response = await http.get(fullUrl);
+  // Decode the response body as json
+  print(response.body);
+  return jsonDecode(response.body);
+}
+
+Future<List> getInsurance() async {
+  // Define the url of the api
+  var url = Uri.parse('http://192.168.56.1:8000/viewTables/insurance');
   // Define the query parameters
   var params = {
     'email': emailId,

@@ -1,8 +1,24 @@
 import 'package:dbs_project/Constants/constantColors.dart';
 import 'package:dbs_project/Utils/car.dart';
+import 'package:dbs_project/controller/functions.dart';
 import 'package:dbs_project/views/carPage.dart';
 import 'package:dbs_project/views/homescreen.dart';
 import 'package:flutter/material.dart';
+
+List<String> coupon = [];
+List<String> insuarance = [];
+
+Future<void> getInsuranceCoupon() async {
+  var data1 = await getCoupons();
+  var data2 = await getInsurance();
+
+  for (var i in data1) {
+    coupon.add(i['discount_code'].toString());
+  }
+  for (var i in data2) {
+    insuarance.add(i['name'].toString());
+  }
+}
 
 class CarGridView extends StatelessWidget {
   CarGridView({Key? key, required this.n, required this.cars})
@@ -27,11 +43,14 @@ class CarGridView extends StatelessWidget {
       ),
       itemBuilder: (ctx, index) {
         return GestureDetector(
-          onTap: () {
+          onTap: () async {
+            await getInsuranceCoupon();
             Navigator.push(
                 context,
                 MaterialPageRoute(
                     builder: (context) => carPage(
+                          insuarance: insuarance,
+                          coupon: coupon,
                           car: cars[index],
                           page_no: 0,
                         )));

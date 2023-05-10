@@ -124,7 +124,7 @@ class _signINState extends State<signIN> {
                     print(await checkLogin(username.text, password.text));
                     if (await checkLogin(username.text, password.text) == 1) {
                       customer = await fetchCustomer(username.text);
-                      getCars();
+
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute<void>(

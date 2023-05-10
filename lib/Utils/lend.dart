@@ -10,6 +10,7 @@ final List<Car> _cars = [];
 void getCars() async {
   var data = await getCustomerCars();
   var x = data[0];
+  _cars.clear();
   for (var i in x) {
     Car car = Car(
         name: i['car_number'].toString(),
@@ -19,6 +20,7 @@ void getCars() async {
         car_number: i['car_number'].toString(),
         cost: i['cost_per_day'].toString(),
         late_fee: i['late_fee_per_hour'].toString());
+
     _cars.add(car);
   }
 }
@@ -35,6 +37,7 @@ class _lendState extends State<lend> {
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
+
     getCars();
     return Scaffold(
       floatingActionButton: FloatingActionButton.extended(

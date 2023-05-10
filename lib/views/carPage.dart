@@ -1,32 +1,40 @@
 import 'package:dbs_project/Constants/constantColors.dart';
 import 'package:dbs_project/Utils/car.dart';
+import 'package:dbs_project/controller/functions.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icon.dart';
 
 import 'homescreen.dart';
 
 class carPage extends StatefulWidget {
-  const carPage({required this.car, required this.page_no, Key? key})
+  carPage(
+      {required this.car,
+      required this.page_no,
+      required this.coupon,
+      required this.insuarance,
+      Key? key})
       : super(key: key);
 
   final Car car;
   final int page_no;
+  List<String> coupon = [];
+  List<String> insuarance = [];
 
   @override
   State<carPage> createState() => _carPageState();
 }
 
 class _carPageState extends State<carPage> {
-
   String? couponCode;
   String? insuaranceCode;
-  List<String> coupon=["Summer10", "Winter20"];
-  List<String> insuarance=["SafeLife", "TensionFree100"];
 
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
+
+    print(widget.coupon);
+    print(widget.insuarance);
     Car car = widget.car;
     return Scaffold(
       appBar: AppBar(
@@ -157,63 +165,85 @@ class _carPageState extends State<carPage> {
                 ],
               ),
             ),
-              SizedBox(
-                height: height*0.03,
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: width * 0.0, vertical: height*0.01),
-                margin: EdgeInsets.symmetric(horizontal: width * 0.1),
-                height: height * 0.15,
-                decoration: BoxDecoration(
-                    color: background2, borderRadius: BorderRadius.circular(10)),
+            SizedBox(
+              height: height * 0.03,
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(
+                  horizontal: width * 0.0, vertical: height * 0.01),
+              margin: EdgeInsets.symmetric(horizontal: width * 0.1),
+              height: height * 0.15,
+              decoration: BoxDecoration(
+                  color: background2, borderRadius: BorderRadius.circular(10)),
               child: Column(
                 children: [
                   SizedBox(
-                    height: height*0.008,
+                    height: height * 0.008,
                   ),
-                  Container(
-
-                    margin: EdgeInsets.symmetric(horizontal: width * 0.03, ),
-                    padding: EdgeInsets.symmetric(horizontal: width * 0.02),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: highlight)
-                    ),
-                    child: DropdownButtonHideUnderline(
-                      child: DropdownButton(
-                        dropdownColor: background,
-                        hint: Text("Select Coupon Code", style: TextStyle(color: highlight, fontSize: height*0.02, fontWeight: FontWeight.bold),),
-                        isExpanded: true,
-                        value: couponCode,
-                        onChanged: (value) {
-                          setState(() {
-                            couponCode = value;
-                          });
-                        },
-                        items: coupon.map((value) {
-                          return DropdownMenuItem(
-                            value: value,
-                            child: Text(value, style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: height*0.02),),
-                          );
-                        }).toList(),
+                  GestureDetector(
+                    onTap: () {},
+                    child: Container(
+                      margin: EdgeInsets.symmetric(
+                        horizontal: width * 0.03,
+                      ),
+                      padding: EdgeInsets.symmetric(horizontal: width * 0.02),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(color: highlight)),
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton(
+                          dropdownColor: background,
+                          hint: Text(
+                            "Select Coupon Code",
+                            style: TextStyle(
+                                color: highlight,
+                                fontSize: height * 0.02,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          isExpanded: true,
+                          value: couponCode,
+                          onChanged: (value) {
+                            setState(() {
+                              couponCode = value;
+                            });
+                          },
+                          items: widget.coupon.map((value) {
+                            return DropdownMenuItem(
+                              value: value,
+                              child: Text(
+                                value,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                    fontSize: height * 0.02),
+                              ),
+                            );
+                          }).toList(),
+                        ),
                       ),
                     ),
                   ),
                   SizedBox(
-                    height: height*0.013,
+                    height: height * 0.013,
                   ),
                   Container(
-
-                    margin: EdgeInsets.symmetric(horizontal: width * 0.03, ),
+                    margin: EdgeInsets.symmetric(
+                      horizontal: width * 0.03,
+                    ),
                     padding: EdgeInsets.symmetric(horizontal: width * 0.02),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        border: Border.all(color: highlight)
-                    ),
+                        border: Border.all(color: highlight)),
                     child: DropdownButtonHideUnderline(
                       child: DropdownButton(
                         dropdownColor: background,
-                        hint: Text("Select Insuarance Code", style: TextStyle(color: highlight, fontSize: height*0.02, fontWeight: FontWeight.bold),),
+                        hint: Text(
+                          "Select Insuarance Code",
+                          style: TextStyle(
+                              color: highlight,
+                              fontSize: height * 0.02,
+                              fontWeight: FontWeight.bold),
+                        ),
                         isExpanded: true,
                         value: insuaranceCode,
                         onChanged: (value) {
@@ -221,10 +251,16 @@ class _carPageState extends State<carPage> {
                             insuaranceCode = value;
                           });
                         },
-                        items: insuarance.map((value) {
+                        items: widget.insuarance.map((value) {
                           return DropdownMenuItem(
                             value: value,
-                            child: Text(value, style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: height*0.02),),
+                            child: Text(
+                              value,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                  fontSize: height * 0.02),
+                            ),
                           );
                         }).toList(),
                       ),
@@ -232,22 +268,36 @@ class _carPageState extends State<carPage> {
                   ),
                 ],
               ),
-              ),
-            SizedBox(
-              height: height*0.03,
             ),
-              Padding(
-                padding:  EdgeInsets.symmetric(horizontal: width*0.07),
-                child: SizedBox(
-                  width: width,
-                  child: ElevatedButton(
-                    onPressed: (widget.page_no == 0)?
-                        (){
-                        showDialog(context: context, builder: (context) => showCustomDialog(context) );
-                        }:
-                        (){},
-                    child: Text((widget.page_no == 0)? "BOOK": "DELETE VEHICLE", style: TextStyle(color: Colors.black, fontSize: height*0.0278, fontWeight: FontWeight.bold),),
-                    style: ButtonStyle(
+            SizedBox(
+              height: height * 0.03,
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: width * 0.07),
+              child: SizedBox(
+                width: width,
+                child: ElevatedButton(
+                  onPressed: (widget.page_no == 0)
+                      ? () {
+                          // Call this booking function Future<int> bookCar(String renterEmail, String startTime, String endTime,String carNumber, String insuranceName, String discountCode)
+                          // and pass the required parameters
+                          bookCar(
+                              emailId,
+                              '2023-05-01 08:00:00',
+                              '2023-05-01 08:00:00',
+                              car.car_number,
+                              insuaranceCode!,
+                              couponCode!);
+                        }
+                      : () {},
+                  child: Text(
+                    (widget.page_no == 0) ? "BOOK" : "DELETE VEHICLE",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: height * 0.0278,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  style: ButtonStyle(
                       backgroundColor: MaterialStatePropertyAll(highlight),
                       padding: MaterialStatePropertyAll(
                           EdgeInsets.symmetric(vertical: height * 0.013))),
@@ -264,83 +314,101 @@ class _carPageState extends State<carPage> {
   }
 }
 
-Dialog showCustomDialog(BuildContext c2)
-{
-  var height= MediaQuery.of(c2).size.height;
-  var width= MediaQuery.of(c2).size.width;
-  TextEditingController coupon= TextEditingController();
-  FocusNode c=FocusNode();
-  TextEditingController insuarance= TextEditingController();
-  FocusNode i=FocusNode();
+Dialog showCustomDialog(BuildContext c2) {
+  var height = MediaQuery.of(c2).size.height;
+  var width = MediaQuery.of(c2).size.width;
+  TextEditingController coupon = TextEditingController();
+  FocusNode c = FocusNode();
+  TextEditingController insuarance = TextEditingController();
+  FocusNode i = FocusNode();
 
   return Dialog(
     elevation: 10,
     backgroundColor: background,
-    shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(30.0)),
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
     child: Container(
-      padding: EdgeInsets.symmetric(horizontal: width*0.05, vertical: height*0.035),
-      height: height*0.3,
+      padding: EdgeInsets.symmetric(
+          horizontal: width * 0.05, vertical: height * 0.035),
+      height: height * 0.3,
       width: width,
       child: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   "Total Payment: ",
-                  style: TextStyle(fontSize: height*0.03, color: highlight),
+                  style: TextStyle(fontSize: height * 0.03, color: highlight),
                 ),
-                Text("₹2000", style: TextStyle(color: Colors.white, fontSize: height*0.025),)
+                Text(
+                  "₹2000",
+                  style:
+                      TextStyle(color: Colors.white, fontSize: height * 0.025),
+                )
               ],
             ),
-            SizedBox(height: height*0.01,),
+            SizedBox(
+              height: height * 0.01,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   "Discount: ",
-                  style: TextStyle(fontSize: height*0.03, color: highlight),
+                  style: TextStyle(fontSize: height * 0.03, color: highlight),
                 ),
-                Text("₹300", style: TextStyle(color: Colors.white, fontSize: height*0.025),)
+                Text(
+                  "₹300",
+                  style:
+                      TextStyle(color: Colors.white, fontSize: height * 0.025),
+                )
               ],
             ),
-            SizedBox(height: height*0.02,),
+            SizedBox(
+              height: height * 0.02,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   "Net Amount: ",
-                  style: TextStyle(fontSize: height*0.03, color: highlight),
+                  style: TextStyle(fontSize: height * 0.03, color: highlight),
                 ),
-                Text("₹1700", style: TextStyle(color: Colors.white, fontSize: height*0.025),)
+                Text(
+                  "₹1700",
+                  style:
+                      TextStyle(color: Colors.white, fontSize: height * 0.025),
+                )
               ],
             ),
-            SizedBox(height: height*0.04,),
-
-
-          SizedBox(
-            width: width,
-            height: height*0.05,
-            child: ElevatedButton(onPressed: (){
-              Navigator.pop(c2);
-            } ,
-                child: Text("Pay Now", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold,fontSize: height*0.02),),
-              style: ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll(highlight),
-
-              ),
+            SizedBox(
+              height: height * 0.04,
             ),
-          )
-
+            SizedBox(
+              width: width,
+              height: height * 0.05,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(c2);
+                },
+                child: Text(
+                  "Pay Now",
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: height * 0.02),
+                ),
+                style: ButtonStyle(
+                  backgroundColor: MaterialStatePropertyAll(highlight),
+                ),
+              ),
+            )
           ],
         ),
       ),
     ),
   );
-
 }
