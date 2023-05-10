@@ -165,12 +165,11 @@ class _carPageState extends State<carPage> {
                 ],
               ),
             ),
-            SizedBox(
-              height: height * 0.03,
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(
-                  horizontal: width * 0.0, vertical: height * 0.01),
+              SizedBox(
+                height: height*0.03,
+              ),
+            (widget.page_no==0)? Container(
+              padding: EdgeInsets.symmetric(horizontal: width * 0.0, vertical: height*0.01),
               margin: EdgeInsets.symmetric(horizontal: width * 0.1),
               height: height * 0.15,
               decoration: BoxDecoration(
@@ -268,6 +267,11 @@ class _carPageState extends State<carPage> {
                   ),
                 ],
               ),
+            ):
+                Container(height: 0,)
+            ,
+            SizedBox(
+              height: height*0.03,
             ),
             SizedBox(
               height: height * 0.03,

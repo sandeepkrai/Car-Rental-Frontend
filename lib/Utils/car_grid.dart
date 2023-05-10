@@ -21,9 +21,10 @@ Future<void> getInsuranceCoupon() async {
 }
 
 class CarGridView extends StatelessWidget {
-  CarGridView({Key? key, required this.n, required this.cars})
+  CarGridView({Key? key, required this.n, required this.cars, required this.page_no})
       : super(key: key);
   final int n;
+  final int page_no;
   final List<Car> cars;
   @override
   Widget build(BuildContext context) {
@@ -52,7 +53,7 @@ class CarGridView extends StatelessWidget {
                           insuarance: insuarance,
                           coupon: coupon,
                           car: cars[index],
-                          page_no: 0,
+                          page_no: page_no,
                         )));
           },
           child: Container(
