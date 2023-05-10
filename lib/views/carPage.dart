@@ -1,6 +1,7 @@
 import 'package:dbs_project/Constants/constantColors.dart';
 import 'package:dbs_project/Utils/car.dart';
 import 'package:flutter/material.dart';
+import 'package:line_icons/line_icon.dart';
 
 import 'homescreen.dart';
 
@@ -16,6 +17,12 @@ class carPage extends StatefulWidget {
 }
 
 class _carPageState extends State<carPage> {
+
+  String? couponCode;
+  String? insuaranceCode;
+  List<String> coupon=["Summer10", "Winter20"];
+  List<String> insuarance=["SafeLife", "TensionFree100"];
+
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -153,6 +160,82 @@ class _carPageState extends State<carPage> {
               SizedBox(
                 height: height*0.03,
               ),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: width * 0.0, vertical: height*0.01),
+                margin: EdgeInsets.symmetric(horizontal: width * 0.1),
+                height: height * 0.15,
+                decoration: BoxDecoration(
+                    color: background2, borderRadius: BorderRadius.circular(10)),
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: height*0.008,
+                  ),
+                  Container(
+
+                    margin: EdgeInsets.symmetric(horizontal: width * 0.03, ),
+                    padding: EdgeInsets.symmetric(horizontal: width * 0.02),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: highlight)
+                    ),
+                    child: DropdownButtonHideUnderline(
+                      child: DropdownButton(
+                        dropdownColor: background,
+                        hint: Text("Select Coupon Code", style: TextStyle(color: highlight, fontSize: height*0.02, fontWeight: FontWeight.bold),),
+                        isExpanded: true,
+                        value: couponCode,
+                        onChanged: (value) {
+                          setState(() {
+                            couponCode = value;
+                          });
+                        },
+                        items: coupon.map((value) {
+                          return DropdownMenuItem(
+                            value: value,
+                            child: Text(value, style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: height*0.02),),
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: height*0.013,
+                  ),
+                  Container(
+
+                    margin: EdgeInsets.symmetric(horizontal: width * 0.03, ),
+                    padding: EdgeInsets.symmetric(horizontal: width * 0.02),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: highlight)
+                    ),
+                    child: DropdownButtonHideUnderline(
+                      child: DropdownButton(
+                        dropdownColor: background,
+                        hint: Text("Select Insuarance Code", style: TextStyle(color: highlight, fontSize: height*0.02, fontWeight: FontWeight.bold),),
+                        isExpanded: true,
+                        value: insuaranceCode,
+                        onChanged: (value) {
+                          setState(() {
+                            insuaranceCode = value;
+                          });
+                        },
+                        items: insuarance.map((value) {
+                          return DropdownMenuItem(
+                            value: value,
+                            child: Text(value, style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: height*0.02),),
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              ),
+            SizedBox(
+              height: height*0.03,
+            ),
               Padding(
                 padding:  EdgeInsets.symmetric(horizontal: width*0.07),
                 child: SizedBox(
@@ -187,89 +270,75 @@ Dialog showCustomDialog(BuildContext c2)
   var width= MediaQuery.of(c2).size.width;
   TextEditingController coupon= TextEditingController();
   FocusNode c=FocusNode();
+  TextEditingController insuarance= TextEditingController();
+  FocusNode i=FocusNode();
 
   return Dialog(
-    elevation: 0,
+    elevation: 10,
     backgroundColor: background,
     shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(30.0)),
     child: Container(
       padding: EdgeInsets.symmetric(horizontal: width*0.05, vertical: height*0.035),
-      height: height*0.4,
+      height: height*0.3,
       width: width,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
 
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "Total Payment: ",
-                style: TextStyle(fontSize: height*0.03, color: highlight),
-              ),
-              Text("₹2000", style: TextStyle(color: Colors.white, fontSize: height*0.025),)
-            ],
-          ),
-          SizedBox(height: height*0.01,),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "Discount: ",
-                style: TextStyle(fontSize: height*0.03, color: highlight),
-              ),
-              Text("₹300", style: TextStyle(color: Colors.white, fontSize: height*0.025),)
-            ],
-          ),
-          SizedBox(height: height*0.02,),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "Net Amount: ",
-                style: TextStyle(fontSize: height*0.03, color: highlight),
-              ),
-              Text("₹1700", style: TextStyle(color: Colors.white, fontSize: height*0.025),)
-            ],
-          ),
-          SizedBox(height: height*0.04,),
-          TextField(
-            cursorColor: Colors.white,
-            style: TextStyle(color: Colors.white),
-            focusNode: c,
-            controller: coupon,
-            decoration: InputDecoration(
-              contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-              labelText: 'Enter Coupon Code',
-              labelStyle: TextStyle(fontSize: height*0.02, fontWeight: FontWeight.bold, color: Colors.white),
-              enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide(width: 2, color: Colors.yellowAccent)),
-              focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide(width: 2, color: Colors.yellow)),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Total Payment: ",
+                  style: TextStyle(fontSize: height*0.03, color: highlight),
+                ),
+                Text("₹2000", style: TextStyle(color: Colors.white, fontSize: height*0.025),)
+              ],
             ),
-          ),
-        SizedBox(
-          height: height*0.045,
+            SizedBox(height: height*0.01,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Discount: ",
+                  style: TextStyle(fontSize: height*0.03, color: highlight),
+                ),
+                Text("₹300", style: TextStyle(color: Colors.white, fontSize: height*0.025),)
+              ],
+            ),
+            SizedBox(height: height*0.02,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Net Amount: ",
+                  style: TextStyle(fontSize: height*0.03, color: highlight),
+                ),
+                Text("₹1700", style: TextStyle(color: Colors.white, fontSize: height*0.025),)
+              ],
+            ),
+            SizedBox(height: height*0.04,),
+
+
+          SizedBox(
+            width: width,
+            height: height*0.05,
+            child: ElevatedButton(onPressed: (){
+              Navigator.pop(c2);
+            } ,
+                child: Text("Pay Now", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold,fontSize: height*0.02),),
+              style: ButtonStyle(
+                backgroundColor: MaterialStatePropertyAll(highlight),
+
+              ),
+            ),
+          )
+
+          ],
         ),
-        SizedBox(
-          width: width,
-          height: height*0.05,
-          child: ElevatedButton(onPressed: (){
-            Navigator.pop(c2);
-          } ,
-              child: Text("Pay Now", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold,fontSize: height*0.02),),
-            style: ButtonStyle(
-              backgroundColor: MaterialStatePropertyAll(highlight),
-
-            ),
-          ),
-        )
-
-        ],
       ),
     ),
   );
