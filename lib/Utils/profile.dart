@@ -185,7 +185,7 @@ class _profileState extends State<profile> {
                 child: ElevatedButton(
                   onPressed: () async {
                     // call the function to get the upcoming bookings
-                    var data = await getCustomerBooking('user1@example.com');
+                    var data = await getCustomerBooking(emailId);
                     print(data[0]);
                     List<Booking> upcomingBooking = [];
                     for (var i in data[0]) {
@@ -196,7 +196,6 @@ class _profileState extends State<profile> {
                           startDate: parseDateTime(i['start_time']));
                       upcomingBooking.add(booking);
                     }
-                    
 
                     Navigator.push(
                       context,
@@ -241,39 +240,39 @@ class _profileState extends State<profile> {
                 ),
               ),
               SizedBox(height: height * 0.024),
-              SizedBox(
-                width: width,
-                height: height * 0.055,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => signIN()));
-                  },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.warning_rounded,
-                        color: Colors.white,
-                        size: height * 0.032,
-                      ),
-                      SizedBox(
-                        width: width * 0.04,
-                      ),
-                      Text(
-                        "DELETE ACCOUNT",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w800,
-                            fontSize: height * 0.024),
-                      ),
-                    ],
-                  ),
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStatePropertyAll(Colors.red),
-                  ),
-                ),
-              ),
+              // SizedBox(
+              //   width: width,
+              //   height: height * 0.055,
+              //   child: ElevatedButton(
+              //     onPressed: () {
+              //       Navigator.pushReplacement(context,
+              //           MaterialPageRoute(builder: (context) => signIN()));
+              //     },
+              //     child: Row(
+              //       mainAxisAlignment: MainAxisAlignment.center,
+              //       children: [
+              //         Icon(
+              //           Icons.warning_rounded,
+              //           color: Colors.white,
+              //           size: height * 0.032,
+              //         ),
+              //         SizedBox(
+              //           width: width * 0.04,
+              //         ),
+              //         Text(
+              //           "DELETE ACCOUNT",
+              //           style: TextStyle(
+              //               color: Colors.white,
+              //               fontWeight: FontWeight.w800,
+              //               fontSize: height * 0.024),
+              //         ),
+              //       ],
+              //     ),
+              //     style: ButtonStyle(
+              //       backgroundColor: MaterialStatePropertyAll(Colors.red),
+              //     ),
+              //   ),
+              // ),
               SizedBox(height: 16.0),
             ],
           ),

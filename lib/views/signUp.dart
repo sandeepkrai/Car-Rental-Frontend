@@ -1,5 +1,6 @@
 import 'package:dbs_project/Constants/constantColors.dart';
 import 'package:dbs_project/Utils/customer.dart';
+import 'package:dbs_project/Utils/rent.dart';
 import 'package:dbs_project/Utils/upload_dl.dart';
 import 'package:dbs_project/Utils/yellow_box.dart';
 import 'package:dbs_project/controller/functions.dart';
@@ -118,7 +119,6 @@ class _signUpState extends State<signUp> {
                   child: TextField(
                     cursorColor: Colors.white,
                     style: TextStyle(color: Colors.white),
-                    focusNode: pass,
                     controller: password,
                     decoration: InputDecoration(
                       contentPadding:
@@ -501,7 +501,7 @@ class _signUpState extends State<signUp> {
                   child: ElevatedButton(
                     onPressed: () async {
                       //
-                      TextEditingController password = TextEditingController();
+                      //TextEditingController password = TextEditingController();
                       print(email.text);
                       var result = await signup(
                           fname.text,
@@ -514,10 +514,11 @@ class _signUpState extends State<signUp> {
                           pin.text,
                           dl.text,
                           email.text,
-                          password.text);
-                      if (result == 1){
-
-                         Customer customer = await fetchCustomer(email.text);
+                          password.text,
+                          phone.text);
+                      if (result == 1) {
+                        Customer customer = await fetchCustomer(email.text);
+                        fetchAvailableCars();
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute<void>(
@@ -525,7 +526,7 @@ class _signUpState extends State<signUp> {
                                       customer: customer,
                                     )));
                       }
-                        
+
                       print(result); // 1 or 0
                     },
                     style: ButtonStyle(

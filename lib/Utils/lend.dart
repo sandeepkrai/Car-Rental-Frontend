@@ -15,7 +15,7 @@ void getCars() async {
     Car car = Car(
         name: i['car_number'].toString(),
         imageUrl:
-            'https://images.unsplash.com/photo-1519681393784-d120267933ba',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgqTGaCcUDDUmNl8GYXIS9vRVuR_b0KNiwsQ&usqp=CAU',
         details: i['availability_car_flag'].toString(),
         car_number: i['car_number'].toString(),
         cost: i['cost_per_day'].toString(),
@@ -55,7 +55,7 @@ class _lendState extends State<lend> {
         child: SingleChildScrollView(
             child: SizedBox(
                 child: CarGridView(
-                  page_no: 1,
+          page_no: 1,
           n: 2,
           cars: _cars,
         ))),

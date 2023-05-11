@@ -1,5 +1,6 @@
 import 'package:dbs_project/Constants/constantColors.dart';
 import 'package:dbs_project/Utils/car.dart';
+import 'package:dbs_project/controller/functions.dart';
 import 'package:flutter/material.dart';
 
 class carPage extends StatefulWidget {
@@ -28,16 +29,14 @@ class _carPageState extends State<carPage> {
   String? _selectedPickupTime;
   String? _selectedDropTime;
 
-
   @override
   Widget build(BuildContext context) {
-
     void _pickupDatePicker() {
       showDatePicker(
-          context: context,
-          initialDate: DateTime.now(),
-          firstDate: DateTime.now(),
-          lastDate: DateTime(DateTime.now().year + 2))
+              context: context,
+              initialDate: DateTime.now(),
+              firstDate: DateTime.now(),
+              lastDate: DateTime(DateTime.now().year + 2))
           .then((value) {
         setState(() {
           _pickupDate = value;
@@ -48,10 +47,10 @@ class _carPageState extends State<carPage> {
 
     void _dropDatePicker() {
       showDatePicker(
-          context: context,
-          initialDate: DateTime.now(),
-          firstDate: DateTime.now(),
-          lastDate: DateTime(DateTime.now().year + 2))
+              context: context,
+              initialDate: DateTime.now(),
+              firstDate: DateTime.now(),
+              lastDate: DateTime(DateTime.now().year + 2))
           .then((value) {
         setState(() {
           _dropDate = value;
@@ -61,12 +60,12 @@ class _carPageState extends State<carPage> {
 
     Future<void> _showPickupTimePicker() async {
       final TimeOfDay? result =
-      await showTimePicker(context: context, initialTime: TimeOfDay.now());
+          await showTimePicker(context: context, initialTime: TimeOfDay.now());
       if (result != null) {
         setState(() {
-          String hour= result.hour.toString();
-          String min= result.minute.toString();
-          _selectedPickupTime = hour+":"+min+":00";
+          String hour = result.hour.toString();
+          String min = result.minute.toString();
+          _selectedPickupTime = hour + ":" + min + ":00";
         });
       }
     }
@@ -74,20 +73,18 @@ class _carPageState extends State<carPage> {
     // We don't need to pass a context to the _show() function
     // You can safety use context as below
 
-
     Future<void> _showDropTimePicker() async {
       final TimeOfDay? result1 =
-      await showTimePicker(context: context, initialTime: TimeOfDay.now());
+          await showTimePicker(context: context, initialTime: TimeOfDay.now());
       if (result1 != null) {
-        String hour= result1.hour.toString();
-        String min= result1.minute.toString();
+        String hour = result1.hour.toString();
+        String min = result1.minute.toString();
         setState(() {
-
-
-          _selectedDropTime = hour+":"+min+":00";
+          _selectedDropTime = hour + ":" + min + ":00";
         });
       }
     }
+
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
 
@@ -223,353 +220,354 @@ class _carPageState extends State<carPage> {
                 ],
               ),
             ),
-              SizedBox(
-                height: height*0.03,
-              ),
-            (widget.page_no==0)? Container(
-              padding: EdgeInsets.symmetric(horizontal: width * 0.0, vertical: height*0.01),
-              margin: EdgeInsets.symmetric(horizontal: width * 0.1),
-              height: height * 0.15,
-              decoration: BoxDecoration(
-                  color: background2, borderRadius: BorderRadius.circular(10)),
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: height * 0.008,
-                  ),
-                  GestureDetector(
-                    onTap: () {},
-                    child: Container(
-                      margin: EdgeInsets.symmetric(
-                        horizontal: width * 0.03,
-                      ),
-                      padding: EdgeInsets.symmetric(horizontal: width * 0.02),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: highlight)),
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButton(
-                          dropdownColor: background,
-                          hint: Text(
-                            "Select Coupon Code",
-                            style: TextStyle(
-                                color: highlight,
-                                fontSize: height * 0.02,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          isExpanded: true,
-                          value: couponCode,
-                          onChanged: (value) {
-                            setState(() {
-                              couponCode = value;
-                            });
-                          },
-                          items: widget.coupon.map((value) {
-                            return DropdownMenuItem(
-                              value: value,
-                              child: Text(
-                                value,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                    fontSize: height * 0.02),
-                              ),
-                            );
-                          }).toList(),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: height * 0.013,
-                  ),
-                  Container(
-                    margin: EdgeInsets.symmetric(
-                      horizontal: width * 0.03,
-                    ),
-                    padding: EdgeInsets.symmetric(horizontal: width * 0.02),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(color: highlight)),
-                    child: DropdownButtonHideUnderline(
-                      child: DropdownButton(
-                        dropdownColor: background,
-                        hint: Text(
-                          "Select Insuarance Code",
-                          style: TextStyle(
-                              color: highlight,
-                              fontSize: height * 0.02,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        isExpanded: true,
-                        value: insuaranceCode,
-                        onChanged: (value) {
-                          setState(() {
-                            insuaranceCode = value;
-                          });
-                        },
-                        items: widget.insuarance.map((value) {
-                          return DropdownMenuItem(
-                            value: value,
-                            child: Text(
-                              value,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                  fontSize: height * 0.02),
-                            ),
-                          );
-                        }).toList(),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ):
-                Container(height: 0,),
             SizedBox(
-              height: height*0.03,
+              height: height * 0.03,
             ),
-            (widget.page_no==0)?
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: width * 0.0, vertical: height*0.01),
-              margin: EdgeInsets.symmetric(horizontal: width * 0.1),
-              decoration: BoxDecoration(
-                  color: background2,
-
-                  borderRadius: BorderRadius.circular(10)
-              ),
-              child: Column(
-                children: [
-                  Container(
-
-                    height: height * 0.09,
-                    width: width,
-                    color: Colors.transparent,
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                          vertical: height * 0.01,
-                          horizontal: width * 0.02),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          GestureDetector(
-                            onTap: _pickupDatePicker,
-                            child: Container(
-                                height: height * 0.2,
-                                width: width * 0.35,
-                                decoration: BoxDecoration(
-                                    color: background,
-                                    borderRadius:
-                                    BorderRadius.circular(20)),
-                                child: Center(
-                                    child: (_pickupDate.toString() !=
-                                        "null")
-                                        ? Row(
-                                      mainAxisAlignment:
-                                      MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          "From: ",
-                                          style: TextStyle(
-                                              color: text,
-                                              fontSize:
-                                              height * 0.0178,
-                                              fontWeight:
-                                              FontWeight.w600),
-                                        ),
-                                        Text(
-                                          _pickupDate!.day
-                                              .toString() +
-                                              "/" +
-                                              _pickupDate!.month
-                                                  .toString() +
-                                              "/" +
-                                              _pickupDate!.year
-                                                  .toString(),
-                                          style: TextStyle(
-                                              color: text,
-                                              fontSize:
-                                              height * 0.0178,
-                                              fontWeight:
-                                              FontWeight.w400),
-                                        )
-                                      ],
-                                    )
-                                        : Text("Pickup Date",
-                                        style: TextStyle(
-                                            color: text,
-                                            fontSize: height * 0.0178,
-                                            fontWeight:
-                                            FontWeight.w600)))),
+            (widget.page_no == 0)
+                ? Container(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: width * 0.0, vertical: height * 0.01),
+                    margin: EdgeInsets.symmetric(horizontal: width * 0.1),
+                    height: height * 0.15,
+                    decoration: BoxDecoration(
+                        color: background2,
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: height * 0.008,
+                        ),
+                        GestureDetector(
+                          onTap: () {},
+                          child: Container(
+                            margin: EdgeInsets.symmetric(
+                              horizontal: width * 0.03,
+                            ),
+                            padding:
+                                EdgeInsets.symmetric(horizontal: width * 0.02),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(color: highlight)),
+                            child: DropdownButtonHideUnderline(
+                              child: DropdownButton(
+                                dropdownColor: background,
+                                hint: Text(
+                                  "Select Coupon Code",
+                                  style: TextStyle(
+                                      color: highlight,
+                                      fontSize: height * 0.02,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                isExpanded: true,
+                                value: couponCode,
+                                onChanged: (value) {
+                                  setState(() {
+                                    couponCode = value;
+                                  });
+                                },
+                                items: widget.coupon.map((value) {
+                                  return DropdownMenuItem(
+                                    value: value,
+                                    child: Text(
+                                      value,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white,
+                                          fontSize: height * 0.02),
+                                    ),
+                                  );
+                                }).toList(),
+                              ),
+                            ),
                           ),
-                          SizedBox(
-                            width: width * 0.03,
+                        ),
+                        SizedBox(
+                          height: height * 0.013,
+                        ),
+                        Container(
+                          margin: EdgeInsets.symmetric(
+                            horizontal: width * 0.03,
                           ),
-                          GestureDetector(
-                            onTap: _dropDatePicker,
-                            child: Container(
-                                height: height * 0.2,
-                                width: width * 0.35,
-                                decoration: BoxDecoration(
-                                    color: background,
-                                    borderRadius:
-                                    BorderRadius.circular(20)),
-                                child: Center(
-                                    child: (_dropDate.toString() != "null")
-                                        ? Row(
-                                      mainAxisAlignment:
-                                      MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          "To: ",
-                                          style: TextStyle(
-                                              color: text,
-                                              fontSize:
-                                              height * 0.0178,
-                                              fontWeight:
-                                              FontWeight.w600),
-                                        ),
-                                        Text(
-                                          _dropDate!.day.toString() +
-                                              "/" +
-                                              _dropDate!.month
-                                                  .toString() +
-                                              "/" +
-                                              _dropDate!.year
-                                                  .toString(),
-                                          style: TextStyle(
-                                              color: text,
-                                              fontSize:
-                                              height * 0.0178,
-                                              fontWeight:
-                                              FontWeight.w400),
-                                        )
-                                      ],
-                                    )
-                                        : Text("Drop Date",
-                                        style: TextStyle(
-                                            color: text,
-                                            fontSize: height * 0.0178,
-                                            fontWeight:
-                                            FontWeight.w600)))),
+                          padding:
+                              EdgeInsets.symmetric(horizontal: width * 0.02),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(color: highlight)),
+                          child: DropdownButtonHideUnderline(
+                            child: DropdownButton(
+                              dropdownColor: background,
+                              hint: Text(
+                                "Select Insuarance Code",
+                                style: TextStyle(
+                                    color: highlight,
+                                    fontSize: height * 0.02,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              isExpanded: true,
+                              value: insuaranceCode,
+                              onChanged: (value) {
+                                setState(() {
+                                  insuaranceCode = value;
+                                });
+                              },
+                              items: widget.insuarance.map((value) {
+                                return DropdownMenuItem(
+                                  value: value,
+                                  child: Text(
+                                    value,
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                        fontSize: height * 0.02),
+                                  ),
+                                );
+                              }).toList(),
+                            ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
+                  )
+                : Container(
+                    height: 0,
                   ),
-                  Container(
-
-                    height: height * 0.09,
-                    width: width,
-                    color: Colors.transparent,
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                          vertical: height * 0.01,
-                          horizontal: width * 0.02),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          GestureDetector(
-                            onTap: _showPickupTimePicker,
-                            child: Container(
-                                height: height * 0.2,
-                                width: width * 0.35,
-                                decoration: BoxDecoration(
-                                    color: background,
-                                    borderRadius:
-                                    BorderRadius.circular(20)),
-                                child: Center(
-                                    child: (_selectedPickupTime != null)
-                                        ? Row(
-                                      mainAxisAlignment:
-                                      MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          "Pickup: ",
-                                          style: TextStyle(
-                                              color: text,
-                                              fontSize:
-                                              height * 0.0178,
-                                              fontWeight:
-                                              FontWeight.w600),
-                                        ),
-                                        Text(
-                                          _selectedPickupTime!,
-                                          style: TextStyle(
-                                              color: text,
-                                              fontSize:
-                                              height * 0.0178,
-                                              fontWeight:
-                                              FontWeight.w400),
-                                        )
-                                      ],
-                                    )
-                                        : Text("Pickup Time",
-                                        style: TextStyle(
-                                            color: text,
-                                            fontSize: height * 0.0178,
-                                            fontWeight:
-                                            FontWeight.w600)))),
+            SizedBox(
+              height: height * 0.03,
+            ),
+            (widget.page_no == 0)
+                ? Container(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: width * 0.0, vertical: height * 0.01),
+                    margin: EdgeInsets.symmetric(horizontal: width * 0.1),
+                    decoration: BoxDecoration(
+                        color: background2,
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Column(
+                      children: [
+                        Container(
+                          height: height * 0.09,
+                          width: width,
+                          color: Colors.transparent,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: height * 0.01,
+                                horizontal: width * 0.02),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                GestureDetector(
+                                  onTap: _pickupDatePicker,
+                                  child: Container(
+                                      height: height * 0.2,
+                                      width: width * 0.35,
+                                      decoration: BoxDecoration(
+                                          color: background,
+                                          borderRadius:
+                                              BorderRadius.circular(20)),
+                                      child: Center(
+                                          child: (_pickupDate.toString() !=
+                                                  "null")
+                                              ? Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Text(
+                                                      "From: ",
+                                                      style: TextStyle(
+                                                          color: text,
+                                                          fontSize:
+                                                              height * 0.0178,
+                                                          fontWeight:
+                                                              FontWeight.w600),
+                                                    ),
+                                                    Text(
+                                                      _pickupDate!.day
+                                                              .toString() +
+                                                          "/" +
+                                                          _pickupDate!.month
+                                                              .toString() +
+                                                          "/" +
+                                                          _pickupDate!.year
+                                                              .toString(),
+                                                      style: TextStyle(
+                                                          color: text,
+                                                          fontSize:
+                                                              height * 0.0178,
+                                                          fontWeight:
+                                                              FontWeight.w400),
+                                                    )
+                                                  ],
+                                                )
+                                              : Text("Pickup Date",
+                                                  style: TextStyle(
+                                                      color: text,
+                                                      fontSize: height * 0.0178,
+                                                      fontWeight:
+                                                          FontWeight.w600)))),
+                                ),
+                                SizedBox(
+                                  width: width * 0.03,
+                                ),
+                                GestureDetector(
+                                  onTap: _dropDatePicker,
+                                  child: Container(
+                                      height: height * 0.2,
+                                      width: width * 0.35,
+                                      decoration: BoxDecoration(
+                                          color: background,
+                                          borderRadius:
+                                              BorderRadius.circular(20)),
+                                      child: Center(
+                                          child: (_dropDate.toString() !=
+                                                  "null")
+                                              ? Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Text(
+                                                      "To: ",
+                                                      style: TextStyle(
+                                                          color: text,
+                                                          fontSize:
+                                                              height * 0.0178,
+                                                          fontWeight:
+                                                              FontWeight.w600),
+                                                    ),
+                                                    Text(
+                                                      _dropDate!.day
+                                                              .toString() +
+                                                          "/" +
+                                                          _dropDate!.month
+                                                              .toString() +
+                                                          "/" +
+                                                          _dropDate!.year
+                                                              .toString(),
+                                                      style: TextStyle(
+                                                          color: text,
+                                                          fontSize:
+                                                              height * 0.0178,
+                                                          fontWeight:
+                                                              FontWeight.w400),
+                                                    )
+                                                  ],
+                                                )
+                                              : Text("Drop Date",
+                                                  style: TextStyle(
+                                                      color: text,
+                                                      fontSize: height * 0.0178,
+                                                      fontWeight:
+                                                          FontWeight.w600)))),
+                                ),
+                              ],
+                            ),
                           ),
-                          SizedBox(
-                            width: width * 0.03,
+                        ),
+                        Container(
+                          height: height * 0.09,
+                          width: width,
+                          color: Colors.transparent,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: height * 0.01,
+                                horizontal: width * 0.02),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                GestureDetector(
+                                  onTap: _showPickupTimePicker,
+                                  child: Container(
+                                      height: height * 0.2,
+                                      width: width * 0.35,
+                                      decoration: BoxDecoration(
+                                          color: background,
+                                          borderRadius:
+                                              BorderRadius.circular(20)),
+                                      child: Center(
+                                          child: (_selectedPickupTime != null)
+                                              ? Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Text(
+                                                      "Pickup: ",
+                                                      style: TextStyle(
+                                                          color: text,
+                                                          fontSize:
+                                                              height * 0.0178,
+                                                          fontWeight:
+                                                              FontWeight.w600),
+                                                    ),
+                                                    Text(
+                                                      _selectedPickupTime!,
+                                                      style: TextStyle(
+                                                          color: text,
+                                                          fontSize:
+                                                              height * 0.0178,
+                                                          fontWeight:
+                                                              FontWeight.w400),
+                                                    )
+                                                  ],
+                                                )
+                                              : Text("Pickup Time",
+                                                  style: TextStyle(
+                                                      color: text,
+                                                      fontSize: height * 0.0178,
+                                                      fontWeight:
+                                                          FontWeight.w600)))),
+                                ),
+                                SizedBox(
+                                  width: width * 0.03,
+                                ),
+                                GestureDetector(
+                                  onTap: _showDropTimePicker,
+                                  child: Container(
+                                      height: height * 0.2,
+                                      width: width * 0.35,
+                                      decoration: BoxDecoration(
+                                          color: background,
+                                          borderRadius:
+                                              BorderRadius.circular(20)),
+                                      child: Center(
+                                          child: (_selectedDropTime != null)
+                                              ? Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Text(
+                                                      "Drop: ",
+                                                      style: TextStyle(
+                                                          color: text,
+                                                          fontSize:
+                                                              height * 0.0178,
+                                                          fontWeight:
+                                                              FontWeight.w600),
+                                                    ),
+                                                    Text(
+                                                      _selectedDropTime!,
+                                                      style: TextStyle(
+                                                          color: text,
+                                                          fontSize:
+                                                              height * 0.0178,
+                                                          fontWeight:
+                                                              FontWeight.w400),
+                                                    )
+                                                  ],
+                                                )
+                                              : Text("Drop Time",
+                                                  style: TextStyle(
+                                                      color: text,
+                                                      fontSize: height * 0.0178,
+                                                      fontWeight:
+                                                          FontWeight.w600)))),
+                                ),
+                              ],
+                            ),
                           ),
-                          GestureDetector(
-                            onTap: _showDropTimePicker,
-                            child: Container(
-
-                                height: height * 0.2,
-                                width: width * 0.35,
-                                decoration: BoxDecoration(
-                                    color: background,
-                                    borderRadius:
-                                    BorderRadius.circular(20)),
-                                child: Center(
-                                    child: (_selectedDropTime != null)
-                                        ? Row(
-                                      mainAxisAlignment:
-                                      MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          "Drop: ",
-                                          style: TextStyle(
-                                              color: text,
-                                              fontSize:
-                                              height * 0.0178,
-                                              fontWeight:
-                                              FontWeight.w600),
-                                        ),
-                                        Text(
-                                          _selectedDropTime!,
-                                          style: TextStyle(
-                                              color: text,
-                                              fontSize:
-                                              height * 0.0178,
-                                              fontWeight:
-                                              FontWeight.w400),
-                                        )
-                                      ],
-                                    )
-                                        : Text("Drop Time",
-                                        style: TextStyle(
-                                            color: text,
-                                            fontSize: height * 0.0178,
-                                            fontWeight:
-                                            FontWeight.w600)))),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                  ),
-
-                ],
-              ),
-            ):
-            Container()
-        ,
-
-
+                  )
+                : Container(),
             SizedBox(
               height: height * 0.03,
             ),
@@ -579,20 +577,18 @@ class _carPageState extends State<carPage> {
                 width: width,
                 child: ElevatedButton(
                   onPressed: (widget.page_no == 0)
-                      ? () async{
+                      ? () async {
+                          String drop = _dropDate.toString().substring(0, 10) +
+                              " " +
+                              _selectedDropTime!;
+                          String pickup =
+                              _pickupDate.toString().substring(0, 10) +
+                                  " " +
+                                  _selectedPickupTime!;
 
-                          String drop=_dropDate.toString().substring(0,10)+" "+_selectedDropTime!;
-                          String pickup=_pickupDate.toString().substring(0,10)+" "+_selectedPickupTime!;
-
-
-                          // bookCar(
-                          //     emailId,
-
-                          //     '2023-05-01 08:00:00',
-                          //     '2023-05-01 08:00:00',
-                          //     car.car_number,
-                          //     insuaranceCode!,
-                          //     couponCode!);
+                          bookCar(emailId, drop, pickup, car.car_number,
+                              insuaranceCode!, couponCode!);
+                          Navigator.pop(context);
                         }
                       : () {},
                   child: Text(
@@ -717,4 +713,3 @@ Dialog showCustomDialog(BuildContext c2) {
     ),
   );
 }
-
