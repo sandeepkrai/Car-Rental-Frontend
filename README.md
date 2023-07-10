@@ -2,6 +2,8 @@
 
 This repository contains the code for a user-friendly cross-platform application developed using Flutter. The application aims to provide a peer-to-peer car rental service, offering convenience and eliminating the need for traditional rental services. It allows users to easily rent cars from individuals within their community.
 
+### Backend Repo: 
+https://github.com/sandeepkrai/PeerCar-Backend
 
 ## Features
 
