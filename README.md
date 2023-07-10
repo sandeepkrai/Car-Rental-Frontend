@@ -1,8 +1,15 @@
-Peer-to-Peer Car Rental Application
+# Peer-to-Peer Car Rental Application
+
 This repository contains the code for a user-friendly cross-platform application developed using Flutter. The application aims to provide a peer-to-peer car rental service, offering convenience and eliminating the need for traditional rental services. It allows users to easily rent cars from individuals within their community.
-Features
+
+
+## Features
+
 <li>Cross-platform application developed using Flutter, ensuring compatibility with both iOS and Android devices.</li><li>Robust backend system implemented with Node.js, creating an efficient API layer for various functionalities, including user authentication, car management, reservations, and secure payments.</li><li>MySQL used for structured data storage and retrieval, ensuring effective organization of user profiles, car details, reservations, and transactions.</li><li>In progress: Web frontend development using HBS templating engine to expand the project's reach and usability beyond mobile devices.</li>
-Setup Instructions
+
+
+## Setup Instructions
+
 To set up the development environment and run the project locally, follow these steps:
 <li><p>Clone this repository to your local machine.</p><pre><div class="bg-black rounded-md mb-4"><div class="flex items-center relative text-gray-200 bg-gray-800 px-4 py-2 text-xs font-sans justify-between rounded-t-md"><span>bash</span><button class="flex ml-auto gap-2"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>Copy code</button></div><div class="p-4 overflow-y-auto"><code class="!whitespace-pre hljs language-bash">git <span class="hljs-built_in">clone</span> https://github.com/username/repository.git
 </code></div></div></pre></li><li><p>Install the necessary dependencies for the Flutter application. Refer to the official Flutter documentation for instructions on how to set up Flutter and its dependencies: <a href="https://flutter.dev/docs/get-started/install" target="_new">Flutter Documentation</a></p></li><li><p>Install the required Node.js packages for the backend system. Navigate to the <code>backend</code> directory and run the following command:</p><pre><div class="bg-black rounded-md mb-4"><div class="flex items-center relative text-gray-200 bg-gray-800 px-4 py-2 text-xs font-sans justify-between rounded-t-md"><button class="flex ml-auto gap-2"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>Copy code</button></div><div class="p-4 overflow-y-auto"><code class="!whitespace-pre hljs">npm install
@@ -10,7 +17,13 @@ To set up the development environment and run the project locally, follow these 
 </code></div></div></pre></li><li><p>Configure the backend API connection to the MySQL database. Open the <code>backend/config.js</code> file and update the MySQL connection details accordingly.</p></li><li><p>Run the backend server. In the <code>backend</code> directory, execute the following command:</p><pre><div class="bg-black rounded-md mb-4"><div class="flex items-center relative text-gray-200 bg-gray-800 px-4 py-2 text-xs font-sans justify-between rounded-t-md"><span>sql</span><button class="flex ml-auto gap-2"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>Copy code</button></div><div class="p-4 overflow-y-auto"><code class="!whitespace-pre hljs language-sql">npm <span class="hljs-keyword">start</span>
 </code></div></div></pre></li><li><p>Run the Flutter application using your preferred IDE or by executing the following command in the root directory of the Flutter project:</p><pre><div class="bg-black rounded-md mb-4"><div class="flex items-center relative text-gray-200 bg-gray-800 px-4 py-2 text-xs font-sans justify-between rounded-t-md"><span>arduino</span><button class="flex ml-auto gap-2"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>Copy code</button></div><div class="p-4 overflow-y-auto"><code class="!whitespace-pre hljs language-arduino">flutter run
 </code></div></div></pre></li>
-Contributions
+
+
+## Contributions
+
 Contributions to this project are welcome. If you find any bugs or have suggestions for improvement, please feel free to open an issue or submit a pull request.
-License
+
+
+## License
+
 This project is licensed under the <a href="LICENSE" target="_new">MIT License</a>. Feel free to use and modify the code according to your needs.
